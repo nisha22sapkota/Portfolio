@@ -288,7 +288,7 @@ with col_about_img:
     <div style="display:flex;flex-direction:column;gap:10px">
 
         <div style="border-radius:10px;overflow:hidden;border:1px solid #21262d;
-                    position:relative;height:260px">
+                    position:relative;height:360px">
             <img src="data:image/jpeg;base64,{MS150_IMG}"
                  style="width:100%;height:100%;object-fit:cover;object-position:center 30%;display:block"
                  alt="Nisha at Bike MS 150 — 100 Miles milestone">
@@ -302,7 +302,7 @@ with col_about_img:
         </div>
 
         <div style="border-radius:10px;overflow:hidden;border:1px solid #21262d;
-                    position:relative;height:260px">
+                    position:relative;height:360px">
             <img src="data:image/jpeg;base64,{MS150_GROUP_IMG}"
                  style="width:100%;height:100%;object-fit:cover;object-position:center 20%;display:block"
                  alt="MS 150 team ride with Logic colleagues">
