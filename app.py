@@ -6,7 +6,8 @@ def _img_b64(path: str) -> str:
         return base64.b64encode(f.read()).decode()
 
 PROFILE_IMG = _img_b64("assets/profile.jpg")
-MS150_IMG   = _img_b64("assets/ms150.jpg")
+MS150_IMG       = _img_b64("assets/ms150.jpg")
+MS150_GROUP_IMG = _img_b64("assets/ms150_group.jpg")
 
 st.set_page_config(
     page_title="Nisha Sapkota | Quant & AI Portfolio",
@@ -284,20 +285,36 @@ with col_about_text:
 
 with col_about_img:
     st.html(f"""
-    <div style="border-radius:10px;overflow:hidden;border:1px solid #21262d;height:100%;
-                min-height:420px;position:relative">
-        <img src="data:image/jpeg;base64,{MS150_IMG}"
-             style="width:100%;height:100%;object-fit:cover;object-position:center top;
-                    display:block;min-height:420px"
-             alt="Nisha at Bike MS 150 — 100 Miles milestone">
-        <div style="position:absolute;bottom:0;left:0;right:0;
-                    background:linear-gradient(transparent,rgba(10,14,26,0.92));
-                    padding:20px 16px 16px">
-            <div style="font-family:'JetBrains Mono',monospace;font-size:11px;color:#4fffb0;
-                        letter-spacing:1px">BIKE MS 150</div>
-            <div style="font-size:13px;color:#c9d1d9;margin-top:3px">
-                100 miles for multiple sclerosis research</div>
+    <div style="display:flex;flex-direction:column;gap:10px">
+
+        <div style="border-radius:10px;overflow:hidden;border:1px solid #21262d;
+                    position:relative;height:260px">
+            <img src="data:image/jpeg;base64,{MS150_IMG}"
+                 style="width:100%;height:100%;object-fit:cover;object-position:center 30%;display:block"
+                 alt="Nisha at Bike MS 150 — 100 Miles milestone">
+            <div style="position:absolute;bottom:0;left:0;right:0;
+                        background:linear-gradient(transparent,rgba(10,14,26,0.92));
+                        padding:16px 14px 12px">
+                <div style="font-family:'JetBrains Mono',monospace;font-size:10px;color:#4fffb0;
+                            letter-spacing:1px">BIKE MS 150 · SOLO</div>
+                <div style="font-size:12px;color:#c9d1d9;margin-top:2px">100 miles milestone</div>
+            </div>
         </div>
+
+        <div style="border-radius:10px;overflow:hidden;border:1px solid #21262d;
+                    position:relative;height:260px">
+            <img src="data:image/jpeg;base64,{MS150_GROUP_IMG}"
+                 style="width:100%;height:100%;object-fit:cover;object-position:center 20%;display:block"
+                 alt="MS 150 team ride with Logic colleagues">
+            <div style="position:absolute;bottom:0;left:0;right:0;
+                        background:linear-gradient(transparent,rgba(10,14,26,0.92));
+                        padding:16px 14px 12px">
+                <div style="font-family:'JetBrains Mono',monospace;font-size:10px;color:#4fffb0;
+                            letter-spacing:1px">BIKE MS 150 · TEAM</div>
+                <div style="font-size:12px;color:#c9d1d9;margin-top:2px">Riding for MS research</div>
+            </div>
+        </div>
+
     </div>
     """)
 
