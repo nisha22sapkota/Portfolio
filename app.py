@@ -6,6 +6,7 @@ def _img_b64(path: str) -> str:
         return base64.b64encode(f.read()).decode()
 
 PROFILE_IMG = _img_b64("assets/profile.jpg")
+MS150_IMG   = _img_b64("assets/ms150.jpg")
 
 st.set_page_config(
     page_title="Nisha Sapkota | Quant & AI Portfolio",
@@ -214,6 +215,91 @@ for col, number, label in zip(
                         text-transform:uppercase;letter-spacing:0.5px">{label}</div>
         </div>
         """)
+
+# ════════════════════════════════════════════════════════════════════════════
+# ABOUT
+# ════════════════════════════════════════════════════════════════════════════
+st.html("""
+<div style="padding:20px 0 8px">
+    <div style="font-family:'JetBrains Mono',monospace;font-size:11px;color:#4fffb0;
+                letter-spacing:2px;text-transform:uppercase;margin-bottom:4px">WHO I AM</div>
+    <div style="font-size:28px;font-weight:700;color:#f0f6fc;letter-spacing:-0.5px">About Me</div>
+</div>
+""")
+
+col_about_text, col_about_img = st.columns([3, 2])
+
+with col_about_text:
+    st.html("""
+    <div style="background:#0d1117;border:1px solid #21262d;border-radius:10px;padding:28px;height:100%">
+
+        <p style="font-size:14px;color:#c9d1d9;line-height:1.85;margin-bottom:18px">
+            At my core, I'm someone who builds things that help people — and
+            <span style="color:#4fffb0;font-weight:500">wealth tech</span> is where that drive found
+            its sharpest focus. Financial tools have historically been built <em>for</em> institutions,
+            not individuals. I want to change that. Whether it's a tax-loss harvesting engine or an
+            AI-driven portfolio optimizer, I'm motivated by the idea that better technology can give
+            everyday investors access to strategies once reserved for the ultra-wealthy.
+        </p>
+
+        <p style="font-size:14px;color:#c9d1d9;line-height:1.85;margin-bottom:18px">
+            That instinct to serve showed up early. In 2017, I won Nepal's
+            <span style="color:#4fffb0;font-weight:500">Open Data Hackathon</span> building a
+            data-driven solution for public good. A year later, I was named one of
+            <span style="color:#4fffb0;font-weight:500">Nepal's 100 Most Influential Women</span> —
+            recognition that pushed me to take my platform seriously and keep showing up for my community.
+        </p>
+
+        <p style="font-size:14px;color:#c9d1d9;line-height:1.85;margin-bottom:18px">
+            Personal growth is something I chase deliberately. I don't wait to feel ready — I sign up
+            first and figure it out. That mindset is what got me on a bike for the
+            <span style="color:#4fffb0;font-weight:500">MS 150</span>, a 150-mile charity ride raising
+            funds for multiple sclerosis research. It's also what led me to Toastmasters (VP of
+            Membership) and what brought me to UT Austin to retool completely at the intersection of
+            machine learning and finance.
+        </p>
+
+        <p style="font-size:14px;color:#c9d1d9;line-height:1.85;margin:0">
+            I believe the best work happens when technical rigor meets human empathy —
+            and I try to bring both to everything I build.
+        </p>
+
+        <div style="display:flex;flex-wrap:wrap;gap:8px;margin-top:22px;padding-top:18px;
+                    border-top:1px solid #21262d">
+            <span style="font-size:11px;background:rgba(79,255,176,0.07);border:1px solid rgba(79,255,176,0.2);
+                         color:#4fffb0;padding:4px 10px;border-radius:4px;
+                         font-family:'JetBrains Mono',monospace">🏆 100 Influential Women of Nepal</span>
+            <span style="font-size:11px;background:rgba(79,255,176,0.07);border:1px solid rgba(79,255,176,0.2);
+                         color:#4fffb0;padding:4px 10px;border-radius:4px;
+                         font-family:'JetBrains Mono',monospace">🥇 Open Data Hackathon Winner</span>
+            <span style="font-size:11px;background:rgba(79,255,176,0.07);border:1px solid rgba(79,255,176,0.2);
+                         color:#4fffb0;padding:4px 10px;border-radius:4px;
+                         font-family:'JetBrains Mono',monospace">🚴 Bike MS 150 Rider</span>
+            <span style="font-size:11px;background:rgba(79,255,176,0.07);border:1px solid rgba(79,255,176,0.2);
+                         color:#4fffb0;padding:4px 10px;border-radius:4px;
+                         font-family:'JetBrains Mono',monospace">🎤 Toastmasters VP</span>
+        </div>
+    </div>
+    """)
+
+with col_about_img:
+    st.html(f"""
+    <div style="border-radius:10px;overflow:hidden;border:1px solid #21262d;height:100%;
+                min-height:420px;position:relative">
+        <img src="data:image/jpeg;base64,{MS150_IMG}"
+             style="width:100%;height:100%;object-fit:cover;object-position:center top;
+                    display:block;min-height:420px"
+             alt="Nisha at Bike MS 150 — 100 Miles milestone">
+        <div style="position:absolute;bottom:0;left:0;right:0;
+                    background:linear-gradient(transparent,rgba(10,14,26,0.92));
+                    padding:20px 16px 16px">
+            <div style="font-family:'JetBrains Mono',monospace;font-size:11px;color:#4fffb0;
+                        letter-spacing:1px">BIKE MS 150</div>
+            <div style="font-size:13px;color:#c9d1d9;margin-top:3px">
+                100 miles for multiple sclerosis research</div>
+        </div>
+    </div>
+    """)
 
 # ════════════════════════════════════════════════════════════════════════════
 # EXPERIENCE
