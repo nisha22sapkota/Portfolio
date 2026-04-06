@@ -22,7 +22,7 @@ st.markdown("""
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap');
 html, body, [class*="css"] { font-family: 'Inter', sans-serif !important; }
 #MainMenu, footer, header { visibility: hidden; }
-[data-testid="stAppViewContainer"] { background: #0a0e1a !important; }
+[data-testid="stAppViewContainer"] { background: #0a0a0a !important; }
 [data-testid="stMainBlockContainer"] { padding: 0 2rem !important; max-width: 1200px !important; }
 [data-testid="stVerticalBlock"] { gap: 0.5rem !important; }
 section[data-testid="stSidebar"] { display: none; }
@@ -32,8 +32,8 @@ section[data-testid="stSidebar"] { display: none; }
 # ── HTML helpers (each call is self-contained) ───────────────────────────────
 def stack_tags(tags: list) -> str:
     items = "".join(
-        f'<span style="font-size:11px;background:rgba(79,255,176,0.07);'
-        f'border:1px solid rgba(79,255,176,0.2);color:#4fffb0;padding:3px 8px;'
+        f'<span style="font-size:11px;background:rgba(255,255,255,0.06);'
+        f'border:1px solid rgba(255,255,255,0.2);color:#ffffff;padding:3px 8px;'
         f'border-radius:4px;font-family:JetBrains Mono,monospace;margin:2px 2px 0 0">{t}</span>'
         for t in tags
     )
@@ -61,13 +61,13 @@ def skill_group_html(group_title: str, skills: list) -> str:
                              font-size:11px">{pct}%</span>
             </div>
             <div style="height:4px;background:#21262d;border-radius:2px;overflow:hidden">
-                <div style="height:100%;width:{pct}%;background:linear-gradient(90deg,#4fffb0,#00d4aa);
+                <div style="height:100%;width:{pct}%;background:linear-gradient(90deg,#ffffff,#888888);
                             border-radius:2px"></div>
             </div>
         </div>""" for name, pct in skills)
     return f"""
-    <div style="background:#0d1117;border:1px solid #21262d;border-radius:10px;padding:22px">
-        <div style="font-family:'JetBrains Mono',monospace;font-size:12px;color:#4fffb0;
+    <div style="background:#111111;border:1px solid #21262d;border-radius:10px;padding:22px">
+        <div style="font-family:'JetBrains Mono',monospace;font-size:12px;color:#ffffff;
                     text-transform:uppercase;letter-spacing:1px;margin-bottom:16px;
                     font-weight:600">{group_title}</div>
         {bars}
@@ -76,16 +76,16 @@ def skill_group_html(group_title: str, skills: list) -> str:
 def project_card_html(p: dict) -> str:
     featured_banner = (
         '<div style="position:absolute;top:14px;right:14px;font-family:JetBrains Mono,monospace;'
-        'font-size:9px;color:#4fffb0;background:rgba(79,255,176,0.1);'
-        'border:1px solid rgba(79,255,176,0.3);padding:3px 8px;border-radius:4px;'
+        'font-size:9px;color:#ffffff;background:rgba(255,255,255,0.08);'
+        'border:1px solid rgba(255,255,255,0.25);padding:3px 8px;border-radius:4px;'
         'letter-spacing:1px">FEATURED</div>'
     ) if p["featured"] else ""
-    border  = "rgba(79,255,176,0.4)" if p["featured"] else "#21262d"
-    bg      = "linear-gradient(135deg,#0d1117 0%,#0a1e14 100%)" if p["featured"] else "#0d1117"
+    border  = "rgba(255,255,255,0.35)" if p["featured"] else "#21262d"
+    bg      = "linear-gradient(135deg,#111111 0%,#1a1a1a 100%)" if p["featured"] else "#111111"
     bullets = "".join(
         f'<li style="font-size:12px;color:#8b949e;padding:3px 0 3px 14px;'
         f'position:relative;list-style:none">'
-        f'<span style="position:absolute;left:0;color:#4fffb0;font-size:10px">▸</span>{h}</li>'
+        f'<span style="position:absolute;left:0;color:#ffffff;font-size:10px">▸</span>{h}</li>'
         for h in p["highlights"]
     )
     return f"""
@@ -93,7 +93,7 @@ def project_card_html(p: dict) -> str:
                 padding:24px;position:relative;height:100%">
         {featured_banner}
         <div style="font-size:26px;margin-bottom:12px">{p['icon']}</div>
-        <div style="font-family:'JetBrains Mono',monospace;font-size:10px;color:#4fffb0;
+        <div style="font-family:'JetBrains Mono',monospace;font-size:10px;color:#ffffff;
                     text-transform:uppercase;letter-spacing:1.5px;margin-bottom:8px">{p['category']}</div>
         <div style="font-size:16px;font-weight:600;color:#f0f6fc;margin-bottom:10px;
                     line-height:1.3">{p['title']}</div>
@@ -106,11 +106,11 @@ def project_card_html(p: dict) -> str:
 # NAV
 # ════════════════════════════════════════════════════════════════════════════
 st.html("""
-<div style="background:rgba(13,17,27,0.97);border-bottom:1px solid #21262d;
+<div style="background:rgba(10,10,10,0.97);border-bottom:1px solid #21262d;
             padding:14px 0;display:flex;justify-content:space-between;align-items:center;
             margin:0 -2rem;padding-left:2rem;padding-right:2rem">
     <div style="font-family:'JetBrains Mono',monospace;font-size:16px;
-                font-weight:500;color:#4fffb0">nisha.sapkota</div>
+                font-weight:500;color:#ffffff">nisha.sapkota</div>
     <div style="font-size:13px;color:#8b949e;font-weight:500">
         About &nbsp;·&nbsp; Experience &nbsp;·&nbsp; Projects &nbsp;·&nbsp; Skills &nbsp;·&nbsp; Contact
     </div>
@@ -121,19 +121,19 @@ st.html("""
 # HERO
 # ════════════════════════════════════════════════════════════════════════════
 st.html(f"""
-<div style="background:linear-gradient(135deg,#0d1117 0%,#0a1628 60%,#0d1117 100%);
+<div style="background:linear-gradient(135deg,#111111 0%,#0a0a0a 60%,#111111 100%);
             border:1px solid #21262d;border-radius:12px;padding:60px 52px 48px;
             position:relative;overflow:hidden;margin-top:16px">
     <div style="position:absolute;top:-20%;right:-10%;width:400px;height:400px;
-                background:radial-gradient(circle,rgba(79,255,176,0.07) 0%,transparent 70%);
+                background:radial-gradient(circle,rgba(255,255,255,0.06) 0%,transparent 70%);
                 pointer-events:none"></div>
 
     <div style="display:flex;align-items:center;justify-content:space-between;gap:40px;flex-wrap:wrap">
 
         <!-- Left: text -->
         <div style="flex:1;min-width:280px">
-            <div style="display:inline-block;background:rgba(79,255,176,0.1);
-                        border:1px solid rgba(79,255,176,0.3);color:#4fffb0;
+            <div style="display:inline-block;background:rgba(255,255,255,0.08);
+                        border:1px solid rgba(255,255,255,0.25);color:#ffffff;
                         font-family:'JetBrains Mono',monospace;font-size:11px;padding:4px 12px;
                         border-radius:20px;margin-bottom:20px;letter-spacing:1px">
                 OPEN TO WORK · QUANT / AI / INVESTMENT STRATEGY · WEALTH TECH
@@ -144,7 +144,7 @@ st.html(f"""
 
             <div style="font-size:19px;font-weight:400;color:#8b949e;margin-bottom:18px">
                 Quant Researcher &amp;
-                <span style="color:#4fffb0;font-weight:500">AI/ML Specialist</span> in Finance
+                <span style="color:#ffffff;font-weight:500">AI/ML Specialist</span> in Finance
             </div>
 
             <div style="font-size:14px;color:#8b949e;line-height:1.75;max-width:520px;margin-bottom:28px">
@@ -170,7 +170,7 @@ st.html(f"""
 
             <div style="display:flex;gap:12px;flex-wrap:wrap">
                 <a href="https://www.linkedin.com/in/nisha-sapkota-aidata/" target="_blank"
-                   style="background:#4fffb0;color:#0d1117;font-weight:600;font-size:13px;
+                   style="background:#ffffff;color:#000000;font-weight:600;font-size:13px;
                           padding:10px 22px;border-radius:6px;text-decoration:none">
                     LinkedIn Profile ↗
                 </a>
@@ -186,8 +186,8 @@ st.html(f"""
         <!-- Right: photo -->
         <div style="flex-shrink:0">
             <div style="width:220px;height:220px;border-radius:50%;overflow:hidden;
-                        border:3px solid #4fffb0;
-                        box-shadow:0 0 32px rgba(79,255,176,0.2)">
+                        border:3px solid #ffffff;
+                        box-shadow:0 0 32px rgba(255,255,255,0.2)">
                 <img src="data:image/jpeg;base64,{PROFILE_IMG}"
                      style="width:120%;height:120%;margin-left:-10%;margin-top:-5%;
                             object-fit:cover;object-position:center top"
@@ -208,9 +208,9 @@ for col, number, label in zip(
 ):
     with col:
         st.html(f"""
-        <div style="background:#0d1117;border:1px solid #21262d;border-radius:10px;
+        <div style="background:#111111;border:1px solid #21262d;border-radius:10px;
                     padding:24px;text-align:center">
-            <div style="font-size:34px;font-weight:700;color:#4fffb0;
+            <div style="font-size:34px;font-weight:700;color:#ffffff;
                         font-family:'JetBrains Mono',monospace">{number}</div>
             <div style="font-size:11px;color:#8b949e;margin-top:6px;
                         text-transform:uppercase;letter-spacing:0.5px">{label}</div>
@@ -222,7 +222,7 @@ for col, number, label in zip(
 # ════════════════════════════════════════════════════════════════════════════
 st.html("""
 <div style="padding:20px 0 8px">
-    <div style="font-family:'JetBrains Mono',monospace;font-size:11px;color:#4fffb0;
+    <div style="font-family:'JetBrains Mono',monospace;font-size:11px;color:#ffffff;
                 letter-spacing:2px;text-transform:uppercase;margin-bottom:4px">WHO I AM</div>
     <div style="font-size:28px;font-weight:700;color:#f0f6fc;letter-spacing:-0.5px">About Me</div>
 </div>
@@ -232,11 +232,11 @@ col_about_text, col_about_img = st.columns([3, 2])
 
 with col_about_text:
     st.html("""
-    <div style="background:#0d1117;border:1px solid #21262d;border-radius:10px;padding:28px;height:100%">
+    <div style="background:#111111;border:1px solid #21262d;border-radius:10px;padding:28px;height:100%">
 
         <p style="font-size:14px;color:#c9d1d9;line-height:1.85;margin-bottom:18px">
             At my core, I'm someone who builds things that help people — and
-            <span style="color:#4fffb0;font-weight:500">wealth tech</span> is where that drive found
+            <span style="color:#ffffff;font-weight:500">wealth tech</span> is where that drive found
             its sharpest focus. Financial tools have historically been built <em>for</em> institutions,
             not individuals. I want to change that. Whether it's a tax-loss harvesting engine or an
             AI-driven portfolio optimizer, I'm motivated by the idea that better technology can give
@@ -245,16 +245,16 @@ with col_about_text:
 
         <p style="font-size:14px;color:#c9d1d9;line-height:1.85;margin-bottom:18px">
             That instinct to serve showed up early. In 2017, I won Nepal's
-            <span style="color:#4fffb0;font-weight:500">Open Data Hackathon</span> building a
+            <span style="color:#ffffff;font-weight:500">Open Data Hackathon</span> building a
             data-driven solution for public good. A year later, I was named one of
-            <span style="color:#4fffb0;font-weight:500">Nepal's 100 Most Influential Women</span> —
+            <span style="color:#ffffff;font-weight:500">Nepal's 100 Most Influential Women</span> —
             recognition that pushed me to take my platform seriously and keep showing up for my community.
         </p>
 
         <p style="font-size:14px;color:#c9d1d9;line-height:1.85;margin-bottom:18px">
             Personal growth is something I chase deliberately. I don't wait to feel ready — I sign up
             first and figure it out. That mindset is what got me on a bike for the
-            <span style="color:#4fffb0;font-weight:500">MS 150</span>, a 150-mile charity ride raising
+            <span style="color:#ffffff;font-weight:500">MS 150</span>, a 150-mile charity ride raising
             funds for multiple sclerosis research. It's also what led me to Toastmasters (VP of
             Membership) and what brought me to UT Austin to retool completely at the intersection of
             machine learning and finance.
@@ -267,17 +267,17 @@ with col_about_text:
 
         <div style="display:flex;flex-wrap:wrap;gap:8px;margin-top:22px;padding-top:18px;
                     border-top:1px solid #21262d">
-            <span style="font-size:11px;background:rgba(79,255,176,0.07);border:1px solid rgba(79,255,176,0.2);
-                         color:#4fffb0;padding:4px 10px;border-radius:4px;
+            <span style="font-size:11px;background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.2);
+                         color:#ffffff;padding:4px 10px;border-radius:4px;
                          font-family:'JetBrains Mono',monospace">🏆 100 Influential Women of Nepal</span>
-            <span style="font-size:11px;background:rgba(79,255,176,0.07);border:1px solid rgba(79,255,176,0.2);
-                         color:#4fffb0;padding:4px 10px;border-radius:4px;
+            <span style="font-size:11px;background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.2);
+                         color:#ffffff;padding:4px 10px;border-radius:4px;
                          font-family:'JetBrains Mono',monospace">🥇 Open Data Hackathon Winner</span>
-            <span style="font-size:11px;background:rgba(79,255,176,0.07);border:1px solid rgba(79,255,176,0.2);
-                         color:#4fffb0;padding:4px 10px;border-radius:4px;
+            <span style="font-size:11px;background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.2);
+                         color:#ffffff;padding:4px 10px;border-radius:4px;
                          font-family:'JetBrains Mono',monospace">🚴 Bike MS 150 Rider</span>
-            <span style="font-size:11px;background:rgba(79,255,176,0.07);border:1px solid rgba(79,255,176,0.2);
-                         color:#4fffb0;padding:4px 10px;border-radius:4px;
+            <span style="font-size:11px;background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.2);
+                         color:#ffffff;padding:4px 10px;border-radius:4px;
                          font-family:'JetBrains Mono',monospace">🎤 Toastmasters VP</span>
         </div>
     </div>
@@ -293,9 +293,9 @@ with col_about_img:
                  style="width:100%;height:100%;object-fit:cover;object-position:center 30%;display:block"
                  alt="Nisha at Bike MS 150 — 100 Miles milestone">
             <div style="position:absolute;bottom:0;left:0;right:0;
-                        background:linear-gradient(transparent,rgba(10,14,26,0.92));
+                        background:linear-gradient(transparent,rgba(0,0,0,0.92));
                         padding:16px 14px 12px">
-                <div style="font-family:'JetBrains Mono',monospace;font-size:10px;color:#4fffb0;
+                <div style="font-family:'JetBrains Mono',monospace;font-size:10px;color:#ffffff;
                             letter-spacing:1px">BIKE MS 150 · SOLO</div>
                 <div style="font-size:12px;color:#c9d1d9;margin-top:2px">100 miles milestone</div>
             </div>
@@ -307,9 +307,9 @@ with col_about_img:
                  style="width:100%;height:100%;object-fit:cover;object-position:center 20%;display:block"
                  alt="MS 150 team ride with Logic colleagues">
             <div style="position:absolute;bottom:0;left:0;right:0;
-                        background:linear-gradient(transparent,rgba(10,14,26,0.92));
+                        background:linear-gradient(transparent,rgba(0,0,0,0.92));
                         padding:16px 14px 12px">
-                <div style="font-family:'JetBrains Mono',monospace;font-size:10px;color:#4fffb0;
+                <div style="font-family:'JetBrains Mono',monospace;font-size:10px;color:#ffffff;
                             letter-spacing:1px">BIKE MS 150 · TEAM</div>
                 <div style="font-size:12px;color:#c9d1d9;margin-top:2px">Riding for MS research</div>
             </div>
@@ -323,7 +323,7 @@ with col_about_img:
 # ════════════════════════════════════════════════════════════════════════════
 st.html("""
 <div style="padding:12px 0 4px">
-    <div style="font-family:'JetBrains Mono',monospace;font-size:11px;color:#4fffb0;
+    <div style="font-family:'JetBrains Mono',monospace;font-size:11px;color:#ffffff;
                 letter-spacing:2px;text-transform:uppercase;margin-bottom:4px">CAREER</div>
     <div style="font-size:28px;font-weight:700;color:#f0f6fc;letter-spacing:-0.5px">Experience</div>
 </div>
@@ -370,8 +370,8 @@ experiences = [
 for exp in experiences:
     st.html(f"""
     <div style="display:flex;gap:20px;padding:18px 0;border-bottom:1px solid #21262d">
-        <div style="width:42px;height:42px;border-radius:50%;background:rgba(79,255,176,0.1);
-                    border:2px solid #4fffb0;display:flex;align-items:center;justify-content:center;
+        <div style="width:42px;height:42px;border-radius:50%;background:rgba(255,255,255,0.08);
+                    border:2px solid #ffffff;display:flex;align-items:center;justify-content:center;
                     font-size:17px;flex-shrink:0;margin-top:2px">{exp['icon']}</div>
         <div style="flex:1">
             <div style="display:flex;justify-content:space-between;align-items:flex-start;
@@ -381,7 +381,7 @@ for exp in experiences:
                             background:rgba(33,38,45,0.8);border:1px solid #30363d;
                             padding:2px 9px;border-radius:4px">{exp['period']}</div>
             </div>
-            <div style="font-size:13px;color:#4fffb0;font-weight:500;margin-bottom:7px">{exp['role']}</div>
+            <div style="font-size:13px;color:#ffffff;font-weight:500;margin-bottom:7px">{exp['role']}</div>
             <div style="font-size:13px;color:#8b949e;line-height:1.65">{exp['desc']}</div>
             {exp_tags(exp['tags'])}
         </div>
@@ -393,7 +393,7 @@ for exp in experiences:
 # ════════════════════════════════════════════════════════════════════════════
 st.html("""
 <div style="padding:20px 0 8px">
-    <div style="font-family:'JetBrains Mono',monospace;font-size:11px;color:#4fffb0;
+    <div style="font-family:'JetBrains Mono',monospace;font-size:11px;color:#ffffff;
                 letter-spacing:2px;text-transform:uppercase;margin-bottom:4px">WORK</div>
     <div style="font-size:28px;font-weight:700;color:#f0f6fc;letter-spacing:-0.5px">Projects</div>
 </div>
@@ -540,7 +540,7 @@ for i in range(0, len(projects), 2):
 # ════════════════════════════════════════════════════════════════════════════
 st.html("""
 <div style="padding:20px 0 8px">
-    <div style="font-family:'JetBrains Mono',monospace;font-size:11px;color:#4fffb0;
+    <div style="font-family:'JetBrains Mono',monospace;font-size:11px;color:#ffffff;
                 letter-spacing:2px;text-transform:uppercase;margin-bottom:4px">CAPABILITIES</div>
     <div style="font-size:28px;font-weight:700;color:#f0f6fc;letter-spacing:-0.5px">
         Skills &amp; Technologies</div>
@@ -568,7 +568,7 @@ for row_start in range(0, len(skill_groups), 3):
 # ════════════════════════════════════════════════════════════════════════════
 st.html("""
 <div style="padding:20px 0 8px">
-    <div style="font-family:'JetBrains Mono',monospace;font-size:11px;color:#4fffb0;
+    <div style="font-family:'JetBrains Mono',monospace;font-size:11px;color:#ffffff;
                 letter-spacing:2px;text-transform:uppercase;margin-bottom:4px">BACKGROUND</div>
     <div style="font-size:28px;font-weight:700;color:#f0f6fc;letter-spacing:-0.5px">
         Education &amp; Achievements</div>
@@ -579,20 +579,20 @@ col_edu, col_ach = st.columns(2)
 
 with col_edu:
     st.html("""
-    <div style="background:#0d1117;border:1px solid #21262d;border-radius:10px;
+    <div style="background:#111111;border:1px solid #21262d;border-radius:10px;
                 padding:22px;margin-bottom:12px">
         <div style="font-size:15px;font-weight:600;color:#f0f6fc;margin-bottom:4px">
             MS Business Analytics (Machine Learning)</div>
-        <div style="font-size:13px;color:#4fffb0;margin-bottom:7px">
+        <div style="font-size:13px;color:#ffffff;margin-bottom:7px">
             University of Texas at Austin — McCombs School of Business</div>
         <div style="font-size:12px;color:#8b949e">Jul 2025 – Apr 2026 · Graduating April 2026</div>
         <div style="font-size:12px;color:#8b949e;margin-top:5px">
             Focus: ML applied to investment strategy, portfolio analytics, AI-driven decision-making</div>
     </div>
-    <div style="background:#0d1117;border:1px solid #21262d;border-radius:10px;padding:22px">
+    <div style="background:#111111;border:1px solid #21262d;border-radius:10px;padding:22px">
         <div style="font-size:15px;font-weight:600;color:#f0f6fc;margin-bottom:4px">
             Data Analytics &amp; Visualization Boot Camp</div>
-        <div style="font-size:13px;color:#4fffb0;margin-bottom:7px">University of Minnesota</div>
+        <div style="font-size:13px;color:#ffffff;margin-bottom:7px">University of Minnesota</div>
         <div style="font-size:12px;color:#8b949e">2020 · Foundations of analytics and visualization</div>
     </div>
     """)
@@ -614,14 +614,14 @@ with col_ach:
                             margin-top:2px">{year}</div>
             </div>
         </div>""" for icon, title, subtitle, year in achievements)
-    st.html(f'<div style="background:#0d1117;border:1px solid #21262d;border-radius:10px;padding:20px">{html_blocks}</div>')
+    st.html(f'<div style="background:#111111;border:1px solid #21262d;border-radius:10px;padding:20px">{html_blocks}</div>')
 
 # ════════════════════════════════════════════════════════════════════════════
 # CONTACT
 # ════════════════════════════════════════════════════════════════════════════
 st.html("""
 <div style="padding:20px 0 8px">
-    <div style="font-family:'JetBrains Mono',monospace;font-size:11px;color:#4fffb0;
+    <div style="font-family:'JetBrains Mono',monospace;font-size:11px;color:#ffffff;
                 letter-spacing:2px;text-transform:uppercase;margin-bottom:4px">CONNECT</div>
     <div style="font-size:28px;font-weight:700;color:#f0f6fc;letter-spacing:-0.5px">Let's Talk</div>
 </div>
@@ -633,7 +633,7 @@ with col_links:
     links_html = "".join(f"""
         <a href="{href}" target="_blank"
            style="display:flex;align-items:center;gap:12px;padding:13px 16px;
-                  background:#0d1117;border:1px solid #21262d;border-radius:8px;
+                  background:#111111;border:1px solid #21262d;border-radius:8px;
                   text-decoration:none;color:#c9d1d9;margin-bottom:10px;font-size:13px">
             <span style="font-size:17px">{icon}</span>
             <span>{label}</span>
@@ -653,8 +653,8 @@ with col_links:
 
 with col_open:
     st.html("""
-    <div style="background:#0d1117;border:1px solid #21262d;border-radius:10px;padding:26px">
-        <div style="font-family:'JetBrains Mono',monospace;font-size:11px;color:#4fffb0;
+    <div style="background:#111111;border:1px solid #21262d;border-radius:10px;padding:26px">
+        <div style="font-family:'JetBrains Mono',monospace;font-size:11px;color:#ffffff;
                     margin-bottom:16px;letter-spacing:1px">OPEN TO OPPORTUNITIES</div>
         <div style="font-size:13px;color:#8b949e;line-height:2.2">
             ✅ &nbsp;Quant Researcher / Analyst<br>
@@ -668,7 +668,7 @@ with col_open:
         <div style="margin-top:18px;padding-top:18px;border-top:1px solid #21262d;
                     font-size:12px;color:#8b949e">
             📍 Austin, TX &nbsp;·&nbsp; Available from
-            <strong style="color:#4fffb0">April 2026</strong>
+            <strong style="color:#ffffff">April 2026</strong>
         </div>
     </div>
     """)
