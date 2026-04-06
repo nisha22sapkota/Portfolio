@@ -172,7 +172,7 @@ st.html(f"""
                           padding:10px 22px;border-radius:6px;text-decoration:none">
                     LinkedIn Profile ↗
                 </a>
-                <a href="mailto:nisha.sapkota@utexas.edu"
+                <a href="mailto:nisha.sapkota.ai@gmail.com"
                    style="background:transparent;color:#c9d1d9;font-weight:500;font-size:13px;
                           padding:10px 22px;border-radius:6px;text-decoration:none;
                           border:1px solid #30363d">
@@ -536,7 +536,7 @@ with col_links:
             <span>{label}</span>
         </a>""" for icon, label, href in [
         ("💼", "linkedin.com/in/nisha-sapkota-aidata", "https://www.linkedin.com/in/nisha-sapkota-aidata/"),
-        ("📧", "nisha.sapkota@utexas.edu",              "mailto:nisha.sapkota@utexas.edu"),
+        ("📧", "nisha.sapkota.ai@gmail.com",              "mailto:nisha.sapkota.ai@gmail.com"),
         ("⚡", "github.com/nisha22sapkota",             "https://github.com/nisha22sapkota"),
     ])
     st.html(f"""
