@@ -136,15 +136,15 @@ st.html(f"""
                         border:1px solid rgba(255,255,255,0.25);color:#ffffff;
                         font-family:'JetBrains Mono',monospace;font-size:11px;padding:4px 12px;
                         border-radius:20px;margin-bottom:20px;letter-spacing:1px">
-                OPEN TO WORK · QUANT / AI / INVESTMENT STRATEGY · WEALTH TECH
+                OPEN TO WORK · QUANT RESEARCH · AI/ML · PRODUCT MANAGEMENT · WEALTH TECH
             </div>
 
             <div style="font-size:50px;font-weight:700;color:#f0f6fc;line-height:1.1;
                         margin-bottom:10px;letter-spacing:-1px">Nisha Sapkota</div>
 
             <div style="font-size:19px;font-weight:400;color:#8b949e;margin-bottom:18px">
-                Quant Researcher &amp;
-                <span style="color:#ffffff;font-weight:500">AI/ML Specialist</span> in Finance
+                Quant Researcher &amp; <span style="color:#ffffff;font-weight:500">AI/ML Specialist</span>
+                · <span style="color:#ffffff;font-weight:500">Product Manager</span> in FinTech/WealthTech
             </div>
 
             <div style="font-size:14px;color:#8b949e;line-height:1.75;max-width:520px;margin-bottom:28px">
@@ -166,6 +166,9 @@ st.html(f"""
                 <span style="background:rgba(33,38,45,0.8);border:1px solid #30363d;color:#c9d1d9;
                              font-size:12px;padding:6px 12px;border-radius:6px;
                              font-family:'JetBrains Mono',monospace">🤖 AI · Quant · WealthTech</span>
+                <span style="background:rgba(33,38,45,0.8);border:1px solid #30363d;color:#c9d1d9;
+                             font-size:12px;padding:6px 12px;border-radius:6px;
+                             font-family:'JetBrains Mono',monospace">📋 Product Strategy</span>
             </div>
 
             <div style="display:flex;gap:12px;flex-wrap:wrap">
@@ -335,10 +338,12 @@ experiences = [
         "role": "Investment Specialist / Quant Researcher · Internship",
         "period": "Jan 2026 – Present",
         "desc": (
-            "Designed and implemented a tax-loss harvesting simulation engine as part of the UT Austin "
-            "MSBA Capstone. Built portfolio rebalancing strategies with threshold drift-band logic, lot "
-            "tracking (FIFO/LIFO/TAX_OPTIMAL), short/long-term gain classification, and loss carry-forward. "
-            "Delivered an institutional-grade Streamlit dashboard with backtesting and strategy comparison analytics."
+            "Identified after-tax return optimization as a critical gap in retail wealth management and "
+            "led end-to-end product delivery: from problem definition and feature specification to "
+            "backtesting infrastructure and stakeholder reporting. Built a simulation engine with "
+            "threshold drift-band rebalancing, FIFO/LIFO/TAX_OPTIMAL lot tracking, ST/LT gain "
+            "classification, and loss carry-forward. Delivered an institutional-grade Streamlit dashboard "
+            "with strategy comparison analytics for Vise's investment team."
         ),
         "tags": ["Python", "Streamlit", "Pandas", "Portfolio Optimization",
                  "Tax-Loss Harvesting", "Backtesting", "Plotly"],
@@ -356,14 +361,17 @@ experiences = [
     },
     {
         "icon": "💡", "company": "Logic (Acquired by Accenture)",
-        "role": "Associate Consultant · 2+ Years",
+        "role": "Associate Product & Strategy Consultant · 2+ Years",
         "period": "Apr 2021 – May 2023",
         "desc": (
-            "Led cross-functional consulting engagements and enterprise solution delivery. "
-            "Performed business analysis, process design, and stakeholder management across "
-            "multiple industry verticals."
+            "Led end-to-end product and solution delivery across enterprise engagements. "
+            "Gathered requirements from C-suite and business stakeholders, translated them into "
+            "technical specifications, and coordinated cross-functional teams through full delivery cycles. "
+            "Delivered roadmaps, process redesigns, and data-driven recommendations that drove measurable "
+            "operational improvements across financial services and tech verticals."
         ),
-        "tags": ["Business Analysis", "Consulting", "Enterprise Solutions", "Stakeholder Management"],
+        "tags": ["Product Strategy", "Requirements Gathering", "Roadmapping", "Stakeholder Management",
+                 "Agile / Scrum", "Business Analysis", "Process Design"],
     },
 ]
 
@@ -409,10 +417,11 @@ projects = [
             "returns with full lot tracking, rebalancing strategies, and a Bloomberg-terminal Streamlit dashboard."
         ),
         "highlights": [
+            "Product spec → backtesting engine → stakeholder dashboard delivered in 12-week capstone cycle",
             "ST/LT gain classification with loss carry-forward and $3k ordinary income offset",
             "Lot selection: FIFO, LIFO, TAX_OPTIMAL — daily through threshold drift-band rebalancing",
-            "Strategy comparison: CAGR, Sharpe, max drawdown, tracking error, IR",
-            "CI via GitHub Actions; Excel export; DRIP dividend reinvestment",
+            "Strategy comparison: CAGR, Sharpe ratio, max drawdown, tracking error, information ratio",
+            "Out-of-sample walk-forward validation; CI via GitHub Actions; Excel export; DRIP reinvestment",
         ],
         "stack": ["Python", "Streamlit", "Pandas", "NumPy", "Plotly", "SciPy", "GitHub Actions"],
     },
@@ -520,9 +529,10 @@ projects = [
             "real-time BI enabling data-driven decision-making across business units."
         ),
         "highlights": [
-            "End-to-end ETL pipelines feeding Tableau dashboards",
+            "Translated C-suite requirements into self-serve BI: eliminated recurring ad-hoc report requests",
+            "End-to-end ETL pipelines feeding Tableau and Power BI dashboards used by 50+ stakeholders",
             "NetSuite Analytics integration for financial operations reporting",
-            "Reduced report turnaround time through automation",
+            "Reduced report turnaround time from days to real-time through pipeline automation",
         ],
         "stack": ["Tableau", "SQL", "NetSuite", "ETL", "Excel", "Power BI"],
     },
@@ -553,7 +563,7 @@ skill_groups = [
     ("// Quant / Finance",  [("Portfolio Analytics", 90), ("Tax-Loss Harvesting", 88), ("Backtesting", 85)]),
     ("// Data & Viz",       [("Tableau / Power BI", 90), ("Pandas / NumPy / Plotly", 92), ("MySQL / MongoDB", 80)]),
     ("// Tools",            [("Streamlit", 88), ("GitHub / CI-CD", 82), ("Cloud (AWS/GCP)", 72)]),
-    ("// Methods",          [("Statistical Modeling", 88), ("Time Series Analysis", 82), ("Optimization", 75)]),
+    ("// Product & Methods", [("Product Strategy / Roadmapping", 85), ("Statistical Modeling", 88), ("Agile / Scrum", 82)]),
 ]
 
 for row_start in range(0, len(skill_groups), 3):
@@ -658,12 +668,12 @@ with col_open:
                     margin-bottom:16px;letter-spacing:1px">OPEN TO OPPORTUNITIES</div>
         <div style="font-size:13px;color:#8b949e;line-height:2.2">
             ✅ &nbsp;Quant Researcher / Analyst<br>
+            ✅ &nbsp;<strong style="color:#ffffff">Product Manager — FinTech / WealthTech</strong><br>
             ✅ &nbsp;AI/ML Engineer (Finance)<br>
             ✅ &nbsp;Data Scientist — WealthTech / FinTech<br>
             ✅ &nbsp;Investment Strategist<br>
-            ✅ &nbsp;Product Manager — Asset Management<br>
-            ✅ &nbsp;Investment Analytics<br>
-            ✅ &nbsp;Portfolio Analytics &amp; Optimization
+            ✅ &nbsp;Portfolio Analytics &amp; Optimization<br>
+            ✅ &nbsp;Investment Analytics
         </div>
         <div style="margin-top:18px;padding-top:18px;border-top:1px solid #21262d;
                     font-size:12px;color:#8b949e">
