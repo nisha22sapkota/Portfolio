@@ -167,15 +167,15 @@ st.html(f"""
             </div>
 
             <div style="font-size:14px;color:#8b949e;line-height:1.75;max-width:520px;margin-bottom:28px">
-                MS Business Analytics candidate at UT Austin McCombs. I build AI-driven investment tools —
-                from tax-loss harvesting engines to RAG-based AI systems — at the intersection of machine
-                learning and quantitative finance.
+                MS Business Analytics (Machine Learning) graduate from UT Austin McCombs. I build
+                AI-driven investment tools — from tax-loss harvesting engines to RAG-based AI systems —
+                at the intersection of machine learning and quantitative finance.
             </div>
 
             <div style="display:flex;flex-wrap:wrap;gap:8px;margin-bottom:28px">
                 <span style="background:rgba(33,38,45,0.8);border:1px solid #30363d;color:#c9d1d9;
                              font-size:12px;padding:6px 12px;border-radius:6px;
-                             font-family:'JetBrains Mono',monospace">🎓 UT Austin MSBA '26</span>
+                             font-family:'JetBrains Mono',monospace">🎓 UT Austin McCombs MSBA</span>
                 <span style="background:rgba(33,38,45,0.8);border:1px solid #30363d;color:#c9d1d9;
                              font-size:12px;padding:6px 12px;border-radius:6px;
                              font-family:'JetBrains Mono',monospace">📍 Austin, TX</span>
@@ -278,8 +278,9 @@ with col_about_text:
             first and figure it out. That mindset is what got me on a bike for the
             <span style="color:#ffffff;font-weight:500">MS 150</span>, a 150-mile charity ride raising
             funds for multiple sclerosis research. It's also what led me to Toastmasters (VP of
-            Membership) and what brought me to UT Austin to retool completely at the intersection of
-            machine learning and finance.
+            Membership) and what drove me to earn my
+            <span style="color:#ffffff;font-weight:500">MS in Business Analytics</span> from
+            UT Austin McCombs — specializing in machine learning at the intersection of AI and finance.
         </p>
 
         <p style="font-size:14px;color:#c9d1d9;line-height:1.85;margin:0">
@@ -636,9 +637,9 @@ with col_edu:
             MS Business Analytics (Machine Learning)</div>
         <div style="font-size:13px;color:#ffffff;margin-bottom:7px">
             University of Texas at Austin — McCombs School of Business</div>
-        <div style="font-size:12px;color:#8b949e">Jul 2025 – Apr 2026 · Graduating April 2026</div>
+        <div style="font-size:12px;color:#8b949e">Jul 2025 – Jun 2026 · Graduated</div>
         <div style="font-size:12px;color:#8b949e;margin-top:5px">
-            Focus: ML applied to investment strategy, portfolio analytics, AI-driven decision-making</div>
+            Specialization: Machine Learning · Focus: AI-driven investment tools, portfolio analytics, quantitative finance</div>
     </div>
     <div style="background:#111111;border:1px solid #21262d;border-radius:10px;padding:22px">
         <div style="font-size:15px;font-weight:600;color:#f0f6fc;margin-bottom:4px">
@@ -718,8 +719,8 @@ with col_open:
         </div>
         <div style="margin-top:18px;padding-top:18px;border-top:1px solid #21262d;
                     font-size:12px;color:#8b949e">
-            📍 Austin, TX &nbsp;·&nbsp; Available from
-            <strong style="color:#ffffff">April 2026</strong>
+            📍 Austin, TX &nbsp;·&nbsp; Available
+            <strong style="color:#ffffff">Immediately</strong>
         </div>
     </div>
     """)
