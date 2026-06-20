@@ -462,7 +462,7 @@ projects = [
         ],
         "stack": ["Python", "Scikit-learn", "Random Forest", "XGBoost", "Streamlit", "Pandas"],
         "github": "https://github.com/nisha22sapkota/loan-acceptance-predictor",
-        "app_link": "https://github.com/nisha22sapkota/loan-acceptance-predictor",
+        "app_link": "https://share.streamlit.io/?aliId=eyJpIjoiY1h0ekE1NDhkQVJScm8xcCIsInQiOiJyTGFrZ2F6OGVRRWxZbk84RDcyZHNnPT0ifQ%253D%253D",
     },
     {
         "icon": "🏥", "featured": False,
