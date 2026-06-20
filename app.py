@@ -443,6 +443,8 @@ projects = [
             "Out-of-sample walk-forward validation; CI via GitHub Actions; Excel export; DRIP reinvestment",
         ],
         "stack": ["Python", "Streamlit", "Pandas", "NumPy", "Plotly", "SciPy", "GitHub Actions"],
+        "github": "https://github.com/jringler30/portfolio-tlh-optimizer",
+        "app_link": "https://portfolio-tlh-optimizer-msba-capstone.streamlit.app/",
     },
     {
         "icon": "🏦", "featured": True,
