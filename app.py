@@ -88,6 +88,24 @@ def project_card_html(p: dict) -> str:
         f'<span style="position:absolute;left:0;color:#ffffff;font-size:10px">▸</span>{h}</li>'
         for h in p["highlights"]
     )
+    links_html = ""
+    if p.get("github") or p.get("app_link"):
+        btns = ""
+        if p.get("github"):
+            btns += (
+                f'<a href="{p["github"]}" target="_blank" '
+                f'style="font-size:11px;color:#ffffff;background:rgba(255,255,255,0.08);'
+                f'border:1px solid rgba(255,255,255,0.25);padding:4px 12px;border-radius:4px;'
+                f'text-decoration:none;font-family:JetBrains Mono,monospace">⬡ GitHub ↗</a>'
+            )
+        if p.get("app_link"):
+            btns += (
+                f'<a href="{p["app_link"]}" target="_blank" '
+                f'style="font-size:11px;color:#000000;background:#ffffff;'
+                f'border:1px solid #ffffff;padding:4px 12px;border-radius:4px;'
+                f'text-decoration:none;font-family:JetBrains Mono,monospace;margin-left:8px">▶ Live App ↗</a>'
+            )
+        links_html = f'<div style="margin-top:14px;padding-top:12px;border-top:1px solid #21262d">{btns}</div>'
     return f"""
     <div style="background:{bg};border:1px solid {border};border-radius:10px;
                 padding:24px;position:relative;height:100%">
@@ -100,6 +118,7 @@ def project_card_html(p: dict) -> str:
         <div style="font-size:13px;color:#8b949e;line-height:1.65;margin-bottom:12px">{p['desc']}</div>
         <ul style="padding:0;margin:0">{bullets}</ul>
         {stack_tags(p['stack'])}
+        {links_html}
     </div>"""
 
 # ════════════════════════════════════════════════════════════════════════════
@@ -424,6 +443,26 @@ projects = [
             "Out-of-sample walk-forward validation; CI via GitHub Actions; Excel export; DRIP reinvestment",
         ],
         "stack": ["Python", "Streamlit", "Pandas", "NumPy", "Plotly", "SciPy", "GitHub Actions"],
+    },
+    {
+        "icon": "🏦", "featured": True,
+        "category": "ML · Banking · End-to-End App",
+        "title": "Personal Loan Acceptance Predictor",
+        "desc": (
+            "End-to-end ML system for a banking institution to predict which customers are most "
+            "likely to accept a personal loan offer — reducing unnecessary marketing spend and "
+            "improving campaign ROI through data-driven targeting."
+        ),
+        "highlights": [
+            "Built & compared Decision Tree, Random Forest, AdaBoost, XGBoost — tuned RF won on recall",
+            "Engineered features: Income per Family, CC-to-Income Ratio, Engagement Score",
+            "4-tier marketing prioritization: Very High / High / Medium / Low priority segments",
+            "Batch scoring tab — upload a customer CSV, get scores + charts + downloadable results",
+            "Interactive Streamlit app with real-time prediction, feature importance chart & gauge",
+        ],
+        "stack": ["Python", "Scikit-learn", "Random Forest", "XGBoost", "Streamlit", "Pandas"],
+        "github": "https://github.com/nisha22sapkota/loan-acceptance-predictor",
+        "app_link": "https://github.com/nisha22sapkota/loan-acceptance-predictor",
     },
     {
         "icon": "🏥", "featured": False,
