@@ -16,168 +16,236 @@ st.set_page_config(
     initial_sidebar_state="collapsed",
 )
 
-# ── Global CSS ────────────────────────────────────────────────────────────────
+# ── Design System & Global CSS ────────────────────────────────────────────────
 st.markdown("""
 <style>
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400&family=JetBrains+Mono:wght@400;500;600&display=swap');
 
+:root {
+  --bg:        #03050a;
+  --surface:   #080d17;
+  --card:      #0c1220;
+  --border:    rgba(255,255,255,0.07);
+  --border-h:  rgba(139,92,246,0.5);
+  --text:      #e2e8f0;
+  --muted:     #64748b;
+  --subtle:    #94a3b8;
+  --grad-a:    #818cf8;
+  --grad-b:    #a78bfa;
+  --grad-c:    #38bdf8;
+  --accent:    #818cf8;
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
 html, body, [class*="css"] { font-family: 'Inter', sans-serif !important; }
 #MainMenu, footer, header { visibility: hidden; }
-[data-testid="stAppViewContainer"] { background: #0a0a0a !important; }
-[data-testid="stMainBlockContainer"] {
-    padding: 0 2rem !important;
-    max-width: 1200px !important;
+
+[data-testid="stAppViewContainer"] {
+  background: var(--bg) !important;
 }
-[data-testid="stVerticalBlock"] { gap: 0.4rem !important; }
+[data-testid="stMainBlockContainer"] {
+  padding: 0 2.5rem !important;
+  max-width: 1180px !important;
+}
+[data-testid="stVerticalBlock"] { gap: 0.35rem !important; }
 section[data-testid="stSidebar"] { display: none; }
 
-/* Custom scrollbar */
-::-webkit-scrollbar { width: 5px; }
-::-webkit-scrollbar-track { background: #0a0a0a; }
-::-webkit-scrollbar-thumb { background: #30363d; border-radius: 3px; }
-::-webkit-scrollbar-thumb:hover { background: #60a5fa; }
+/* Scrollbar */
+::-webkit-scrollbar { width: 4px; }
+::-webkit-scrollbar-track { background: var(--bg); }
+::-webkit-scrollbar-thumb { background: #1e293b; border-radius: 4px; }
+::-webkit-scrollbar-thumb:hover { background: var(--accent); }
 
-/* Divider */
-hr { border-color: #21262d !important; margin: 0.5rem 0 !important; }
+hr { border-color: rgba(255,255,255,0.05) !important; margin: 0.25rem 0 !important; }
+
+/* ── Sticky nav ── */
+.topnav {
+  position: sticky; top: 0; z-index: 1000;
+  background: rgba(3,5,10,0.85);
+  backdrop-filter: blur(20px) saturate(180%);
+  -webkit-backdrop-filter: blur(20px) saturate(180%);
+  border-bottom: 1px solid rgba(255,255,255,0.06);
+  padding: 15px 2.5rem;
+  display: flex; justify-content: space-between; align-items: center;
+  margin: 0 -2.5rem;
+}
+.topnav-brand {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 15px; font-weight: 600;
+  background: linear-gradient(135deg, #818cf8, #38bdf8);
+  -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+  background-clip: text;
+  text-decoration: none;
+}
+.topnav-links { display: flex; gap: 32px; }
+.topnav-links a {
+  font-size: 13px; color: var(--muted); text-decoration: none;
+  font-weight: 500; transition: color 0.2s ease;
+  letter-spacing: 0.01em;
+}
+.topnav-links a:hover { color: var(--text); }
+
+/* ── Gradient text utility ── */
+.grad-text {
+  background: linear-gradient(135deg, #818cf8 0%, #a78bfa 40%, #38bdf8 100%);
+  -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* ── Section label ── */
+.sec-label {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px; letter-spacing: 3px; text-transform: uppercase;
+  background: linear-gradient(90deg, #818cf8, #38bdf8);
+  -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+  background-clip: text;
+  margin-bottom: 8px; display: block;
+}
+.sec-title {
+  font-size: 34px; font-weight: 800; color: var(--text);
+  letter-spacing: -0.5px; margin-bottom: 14px; display: block;
+}
+.sec-bar {
+  width: 40px; height: 3px;
+  background: linear-gradient(90deg, #818cf8, #38bdf8);
+  border-radius: 2px; margin-bottom: 32px;
+}
 </style>
 """, unsafe_allow_html=True)
 
 # ── Helpers ───────────────────────────────────────────────────────────────────
 def stack_tags(tags):
     items = "".join(
-        f'<span style="font-size:11px;background:rgba(96,165,250,0.08);'
-        f'border:1px solid rgba(96,165,250,0.25);color:#93c5fd;padding:3px 8px;'
-        f'border-radius:4px;font-family:JetBrains Mono,monospace;margin:2px 2px 0 0">{t}</span>'
+        f'<span style="font-size:11px;'
+        f'background:linear-gradient(135deg,rgba(129,140,248,0.1),rgba(56,189,248,0.1));'
+        f'border:1px solid rgba(129,140,248,0.2);color:#a5b4fc;'
+        f'padding:3px 9px;border-radius:20px;'
+        f'font-family:JetBrains Mono,monospace;white-space:nowrap">{t}</span>'
         for t in tags
     )
-    return f'<div style="display:flex;flex-wrap:wrap;gap:4px;margin-top:12px;padding-top:12px;border-top:1px solid #21262d">{items}</div>'
+    return f'<div style="display:flex;flex-wrap:wrap;gap:6px;margin-top:14px;padding-top:14px;border-top:1px solid rgba(255,255,255,0.06)">{items}</div>'
 
 def exp_tags(tags):
     items = "".join(
-        f'<span style="font-size:11px;background:rgba(33,38,45,0.8);border:1px solid #30363d;'
-        f'color:#8b949e;padding:3px 8px;border-radius:4px;font-family:JetBrains Mono,monospace;'
-        f'margin:2px 2px 0 0">{t}</span>'
+        f'<span style="font-size:11px;background:rgba(255,255,255,0.04);'
+        f'border:1px solid rgba(255,255,255,0.08);color:#64748b;'
+        f'padding:3px 9px;border-radius:20px;font-family:JetBrains Mono,monospace">{t}</span>'
         for t in tags
     )
-    return f'<div style="display:flex;flex-wrap:wrap;gap:4px;margin-top:10px">{items}</div>'
+    return f'<div style="display:flex;flex-wrap:wrap;gap:6px;margin-top:12px">{items}</div>'
 
 def skill_group_html(group_title, skills):
     bars = "".join(f"""
-        <div style="margin-bottom:14px">
-            <div style="display:flex;justify-content:space-between;font-size:13px;color:#c9d1d9;margin-bottom:6px">
+        <div style="margin-bottom:16px">
+            <div style="display:flex;justify-content:space-between;font-size:13px;
+                        color:#94a3b8;margin-bottom:7px">
                 <span>{name}</span>
-                <span style="color:#60a5fa;font-family:'JetBrains Mono',monospace;font-size:11px">{pct}%</span>
+                <span style="font-family:'JetBrains Mono',monospace;font-size:11px;
+                             background:linear-gradient(90deg,#818cf8,#38bdf8);
+                             -webkit-background-clip:text;-webkit-text-fill-color:transparent;
+                             background-clip:text;">{pct}%</span>
             </div>
-            <div style="height:4px;background:#21262d;border-radius:2px;overflow:hidden">
+            <div style="height:3px;background:rgba(255,255,255,0.06);border-radius:2px;overflow:hidden">
                 <div style="height:100%;width:{pct}%;
-                            background:linear-gradient(90deg,#60a5fa,#3b82f6);
-                            border-radius:2px;
-                            animation:fillBar 1.4s ease-out forwards"></div>
+                            background:linear-gradient(90deg,#818cf8,#38bdf8);
+                            border-radius:2px;animation:fillBar 1.6s ease-out"></div>
             </div>
         </div>""" for name, pct in skills)
     return f"""
-    <style>
-    @keyframes fillBar {{ from {{ width: 0% }} to {{ width: 100% }} }}
-    </style>
-    <div style="background:#111111;border:1px solid #21262d;border-radius:12px;padding:22px;
-                transition:border-color 0.25s,box-shadow 0.25s;height:100%"
-         onmouseover="this.style.borderColor='rgba(96,165,250,0.4)';this.style.boxShadow='0 8px 32px rgba(96,165,250,0.08)'"
-         onmouseout="this.style.borderColor='#21262d';this.style.boxShadow='none'">
-        <div style="font-family:'JetBrains Mono',monospace;font-size:12px;color:#60a5fa;
-                    text-transform:uppercase;letter-spacing:1px;margin-bottom:18px;font-weight:600">{group_title}</div>
+    <style>@keyframes fillBar{{from{{width:0}}to{{width:100%}}}}</style>
+    <div style="background:rgba(12,18,32,0.8);border:1px solid rgba(255,255,255,0.07);
+                border-radius:16px;padding:24px;height:100%;
+                transition:border-color 0.3s,transform 0.3s,box-shadow 0.3s;backdrop-filter:blur(10px)"
+         onmouseover="this.style.borderColor='rgba(129,140,248,0.35)';this.style.transform='translateY(-3px)';this.style.boxShadow='0 16px 48px rgba(129,140,248,0.1)'"
+         onmouseout="this.style.borderColor='rgba(255,255,255,0.07)';this.style.transform='translateY(0)';this.style.boxShadow='none'">
+        <div style="font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:1.5px;
+                    text-transform:uppercase;margin-bottom:20px;font-weight:600;
+                    background:linear-gradient(90deg,#818cf8,#38bdf8);
+                    -webkit-background-clip:text;-webkit-text-fill-color:transparent;
+                    background-clip:text">{group_title}</div>
         {bars}
     </div>"""
 
 def project_card_html(p):
-    featured_banner = (
-        '<div style="position:absolute;top:14px;right:14px;font-family:JetBrains Mono,monospace;'
-        'font-size:9px;color:#60a5fa;background:rgba(96,165,250,0.1);'
-        'border:1px solid rgba(96,165,250,0.4);padding:3px 8px;border-radius:4px;'
-        'letter-spacing:1px">FEATURED</div>'
-    ) if p["featured"] else ""
-    border = "rgba(96,165,250,0.35)" if p["featured"] else "#21262d"
-    bg     = "linear-gradient(135deg,#0f172a 0%,#111827 100%)" if p["featured"] else "#111111"
+    if p["featured"]:
+        border_style = "border:1px solid rgba(129,140,248,0.25)"
+        bg_style     = "background:linear-gradient(145deg,#0c1220 0%,#0f172a 60%,#0c1527 100%)"
+        featured_badge = """
+        <div style="position:absolute;top:16px;right:16px;
+                    background:linear-gradient(135deg,rgba(129,140,248,0.15),rgba(56,189,248,0.1));
+                    border:1px solid rgba(129,140,248,0.35);
+                    color:#a5b4fc;font-family:JetBrains Mono,monospace;font-size:9px;
+                    padding:4px 10px;border-radius:20px;letter-spacing:1.5px">FEATURED</div>"""
+        hover_border = "rgba(129,140,248,0.5)"
+    else:
+        border_style = "border:1px solid rgba(255,255,255,0.06)"
+        bg_style     = "background:rgba(12,18,32,0.6)"
+        featured_badge = ""
+        hover_border = "rgba(129,140,248,0.3)"
+
     bullets = "".join(
-        f'<li style="font-size:12px;color:#8b949e;padding:3px 0 3px 14px;position:relative;list-style:none">'
-        f'<span style="position:absolute;left:0;color:#60a5fa;font-size:10px">▸</span>{h}</li>'
+        f'<li style="font-size:12.5px;color:#64748b;padding:4px 0 4px 16px;'
+        f'position:relative;list-style:none;line-height:1.6">'
+        f'<span style="position:absolute;left:0;top:6px;width:6px;height:6px;border-radius:50%;'
+        f'background:linear-gradient(135deg,#818cf8,#38bdf8);display:inline-block"></span>{h}</li>'
         for h in p["highlights"]
     )
+
     links_html = ""
     if p.get("github") or p.get("app_link"):
         btns = ""
         if p.get("github"):
             btns += (
                 f'<a href="{p["github"]}" target="_blank" '
-                f'style="font-size:11px;color:#93c5fd;background:rgba(96,165,250,0.08);'
-                f'border:1px solid rgba(96,165,250,0.3);padding:6px 14px;border-radius:6px;'
-                f'text-decoration:none;font-family:JetBrains Mono,monospace;'
-                f'transition:all 0.2s" '
-                f'onmouseover="this.style.background=\'rgba(96,165,250,0.18)\'" '
-                f'onmouseout="this.style.background=\'rgba(96,165,250,0.08)\'">⬡ GitHub ↗</a>'
+                f'style="font-size:12px;color:#a5b4fc;'
+                f'background:rgba(129,140,248,0.08);'
+                f'border:1px solid rgba(129,140,248,0.2);'
+                f'padding:7px 16px;border-radius:8px;text-decoration:none;'
+                f'font-family:JetBrains Mono,monospace;font-weight:500;'
+                f'transition:all 0.2s;display:inline-block" '
+                f'onmouseover="this.style.background=\'rgba(129,140,248,0.18)\';this.style.borderColor=\'rgba(129,140,248,0.5)\'" '
+                f'onmouseout="this.style.background=\'rgba(129,140,248,0.08)\';this.style.borderColor=\'rgba(129,140,248,0.2)\'">⬡ GitHub</a>'
             )
         if p.get("app_link"):
             btns += (
                 f'<a href="{p["app_link"]}" target="_blank" '
-                f'style="font-size:11px;color:#000000;background:#60a5fa;'
-                f'border:1px solid #60a5fa;padding:6px 14px;border-radius:6px;'
-                f'text-decoration:none;font-family:JetBrains Mono,monospace;margin-left:8px;'
-                f'font-weight:600;transition:all 0.2s" '
-                f'onmouseover="this.style.background=\'#93c5fd\'" '
-                f'onmouseout="this.style.background=\'#60a5fa\'">▶ Live App ↗</a>'
+                f'style="font-size:12px;color:#0c1220;font-weight:700;'
+                f'background:linear-gradient(135deg,#818cf8,#38bdf8);'
+                f'border:none;padding:7px 16px;border-radius:8px;'
+                f'text-decoration:none;font-family:JetBrains Mono,monospace;'
+                f'transition:all 0.2s;display:inline-block;margin-left:10px;'
+                f'box-shadow:0 4px 16px rgba(129,140,248,0.25)" '
+                f'onmouseover="this.style.boxShadow=\'0 6px 24px rgba(129,140,248,0.45)\';this.style.transform=\'translateY(-1px)\'" '
+                f'onmouseout="this.style.boxShadow=\'0 4px 16px rgba(129,140,248,0.25)\';this.style.transform=\'translateY(0)\'">▶ Live App ↗</a>'
             )
-        links_html = f'<div style="margin-top:16px;padding-top:14px;border-top:1px solid #21262d">{btns}</div>'
+        links_html = f'<div style="margin-top:18px;padding-top:16px;border-top:1px solid rgba(255,255,255,0.06);display:flex;align-items:center">{btns}</div>'
+
     return f"""
-    <div style="background:{bg};border:1px solid {border};border-radius:12px;padding:26px;
-                position:relative;height:100%;
-                transition:transform 0.25s ease,box-shadow 0.25s ease,border-color 0.25s ease;
-                cursor:default"
-         onmouseover="this.style.transform='translateY(-5px)';this.style.boxShadow='0 20px 60px rgba(96,165,250,0.12)';this.style.borderColor='rgba(96,165,250,0.5)'"
-         onmouseout="this.style.transform='translateY(0)';this.style.boxShadow='none';this.style.borderColor='{border}'">
-        {featured_banner}
-        <div style="font-size:28px;margin-bottom:14px">{p['icon']}</div>
-        <div style="font-family:'JetBrains Mono',monospace;font-size:10px;color:#60a5fa;
-                    text-transform:uppercase;letter-spacing:1.5px;margin-bottom:8px">{p['category']}</div>
-        <div style="font-size:16px;font-weight:600;color:#f0f6fc;margin-bottom:10px;line-height:1.3">{p['title']}</div>
-        <div style="font-size:13px;color:#8b949e;line-height:1.7;margin-bottom:12px">{p['desc']}</div>
+    <div style="{bg_style};{border_style};border-radius:18px;padding:28px;
+                position:relative;height:100%;backdrop-filter:blur(10px);
+                transition:transform 0.3s ease,box-shadow 0.3s ease,border-color 0.3s ease"
+         onmouseover="this.style.transform='translateY(-6px)';this.style.boxShadow='0 24px 64px rgba(129,140,248,0.15)';this.style.borderColor='{hover_border}'"
+         onmouseout="this.style.transform='translateY(0)';this.style.boxShadow='none';this.style.borderColor='{'rgba(129,140,248,0.25)' if p['featured'] else 'rgba(255,255,255,0.06)'}'">
+        {featured_badge}
+        <div style="font-size:30px;margin-bottom:16px;line-height:1">{p['icon']}</div>
+        <div style="font-size:10px;font-family:'JetBrains Mono',monospace;letter-spacing:2px;
+                    text-transform:uppercase;margin-bottom:10px;font-weight:500;
+                    background:linear-gradient(90deg,#818cf8,#38bdf8);
+                    -webkit-background-clip:text;-webkit-text-fill-color:transparent;
+                    background-clip:text">{p['category']}</div>
+        <div style="font-size:17px;font-weight:700;color:#e2e8f0;margin-bottom:10px;
+                    line-height:1.35;letter-spacing:-0.2px">{p['title']}</div>
+        <div style="font-size:13px;color:#64748b;line-height:1.75;margin-bottom:14px">{p['desc']}</div>
         <ul style="padding:0;margin:0">{bullets}</ul>
         {stack_tags(p['stack'])}
         {links_html}
     </div>"""
 
 # ════════════════════════════════════════════════════════════════════════════
-# STICKY NAV
+# NAV
 # ════════════════════════════════════════════════════════════════════════════
 st.markdown("""
-<style>
-.topnav {
-    position: sticky; top: 0; z-index: 999;
-    background: rgba(10,10,10,0.96);
-    backdrop-filter: blur(12px);
-    -webkit-backdrop-filter: blur(12px);
-    border-bottom: 1px solid #21262d;
-    padding: 14px 2rem;
-    display: flex; justify-content: space-between; align-items: center;
-    margin: 0 -2rem;
-}
-.topnav-brand {
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 16px; font-weight: 600; color: #ffffff;
-    text-decoration: none;
-}
-.topnav-links { display: flex; gap: 28px; }
-.topnav-links a {
-    font-size: 13px; color: #8b949e; text-decoration: none;
-    font-weight: 500; transition: color 0.2s ease;
-    position: relative; padding-bottom: 2px;
-}
-.topnav-links a::after {
-    content: ''; position: absolute; bottom: -2px; left: 0;
-    width: 0; height: 2px; background: #60a5fa;
-    transition: width 0.25s ease;
-}
-.topnav-links a:hover { color: #60a5fa; }
-.topnav-links a:hover::after { width: 100%; }
-</style>
 <div class="topnav">
     <span class="topnav-brand">nisha.sapkota</span>
     <nav class="topnav-links">
@@ -195,131 +263,192 @@ st.markdown("""
 # ════════════════════════════════════════════════════════════════════════════
 st.html(f"""
 <style>
-@keyframes heroGlow {{
-    0%   {{ background-position: 0% 50%; }}
-    50%  {{ background-position: 100% 50%; }}
-    100% {{ background-position: 0% 50%; }}
+@keyframes pulse-ring {{
+  0%   {{ transform: scale(1);   opacity: 0.6; }}
+  50%  {{ transform: scale(1.06); opacity: 0.3; }}
+  100% {{ transform: scale(1);   opacity: 0.6; }}
+}}
+@keyframes float {{
+  0%, 100% {{ transform: translateY(0px); }}
+  50%       {{ transform: translateY(-8px); }}
 }}
 @keyframes fadeUp {{
-    from {{ opacity:0; transform:translateY(24px); }}
-    to   {{ opacity:1; transform:translateY(0); }}
+  from {{ opacity:0; transform:translateY(28px); }}
+  to   {{ opacity:1; transform:translateY(0); }}
 }}
-.hero-badge {{
-    display:inline-block;background:rgba(96,165,250,0.1);
-    border:1px solid rgba(96,165,250,0.35);color:#93c5fd;
-    font-family:'JetBrains Mono',monospace;font-size:11px;
-    padding:5px 14px;border-radius:20px;margin-bottom:22px;letter-spacing:1px;
+.hero-wrap {{
+  animation: fadeUp 0.8s ease-out forwards;
+  position: relative; border-radius: 24px; overflow: hidden;
+  border: 1px solid rgba(129,140,248,0.12);
+  margin-top: 20px; padding: 72px 60px 64px;
+  background: radial-gradient(ellipse 80% 60% at 70% -10%, rgba(129,140,248,0.07) 0%, transparent 60%),
+              radial-gradient(ellipse 60% 50% at 10% 100%, rgba(56,189,248,0.05) 0%, transparent 55%),
+              linear-gradient(160deg, #080d17 0%, #03050a 50%, #080d17 100%);
 }}
-.hero-btn-primary {{
-    background:#60a5fa;color:#000000;font-weight:700;font-size:13px;
-    padding:11px 26px;border-radius:8px;text-decoration:none;
-    transition:all 0.2s ease;display:inline-block;
+.hero-wrap::before {{
+  content:''; position:absolute; inset:0;
+  background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23818cf8' fill-opacity='0.018'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+  pointer-events: none; z-index: 0;
 }}
-.hero-btn-primary:hover {{ background:#93c5fd; transform:translateY(-2px); box-shadow:0 8px 24px rgba(96,165,250,0.3); }}
-.hero-btn-secondary {{
-    background:transparent;color:#c9d1d9;font-weight:500;font-size:13px;
-    padding:11px 26px;border-radius:8px;text-decoration:none;
-    border:1px solid #30363d;transition:all 0.2s ease;display:inline-block;
+.hero-content {{ position: relative; z-index: 1; }}
+.status-pill {{
+  display:inline-flex;align-items:center;gap:8px;
+  background:rgba(129,140,248,0.08);
+  border:1px solid rgba(129,140,248,0.2);
+  padding:6px 16px; border-radius:30px; margin-bottom:28px;
 }}
-.hero-btn-secondary:hover {{ border-color:#60a5fa; color:#60a5fa; transform:translateY(-2px); }}
+.status-dot {{
+  width:7px;height:7px;border-radius:50%;
+  background:linear-gradient(135deg,#818cf8,#38bdf8);
+  animation:pulse-ring 2s ease-in-out infinite;
+  box-shadow:0 0 0 0 rgba(129,140,248,0.4);
+}}
+.hero-name {{
+  font-size:58px;font-weight:800;letter-spacing:-2px;line-height:1.0;
+  margin-bottom:14px;
+  background:linear-gradient(135deg,#f8fafc 0%,#e2e8f0 50%,#94a3b8 100%);
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
+}}
+.hero-role {{
+  font-size:20px;color:#64748b;margin-bottom:22px;line-height:1.5;font-weight:400;
+}}
+.hero-desc {{
+  font-size:15px;color:#64748b;line-height:1.9;max-width:540px;margin-bottom:36px;font-weight:400;
+}}
+.chip-row {{ display:flex;flex-wrap:wrap;gap:8px;margin-bottom:36px; }}
 .chip {{
-    background:rgba(33,38,45,0.9);border:1px solid #30363d;color:#c9d1d9;
-    font-size:12px;padding:6px 13px;border-radius:6px;
-    font-family:'JetBrains Mono',monospace;
-    transition:border-color 0.2s,color 0.2s;display:inline-block;
+  font-size:12px;color:#94a3b8;padding:6px 14px;border-radius:30px;
+  background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.08);
+  font-family:'JetBrains Mono',monospace;
+  transition:all 0.2s;cursor:default;
 }}
-.chip:hover {{ border-color:#60a5fa; color:#93c5fd; }}
+.chip:hover {{ border-color:rgba(129,140,248,0.4);color:#a5b4fc; }}
+.btn-primary {{
+  display:inline-block;
+  background:linear-gradient(135deg,#818cf8,#38bdf8);
+  color:#03050a;font-weight:700;font-size:13px;
+  padding:12px 28px;border-radius:10px;text-decoration:none;
+  transition:all 0.25s;box-shadow:0 4px 20px rgba(129,140,248,0.3);
+  letter-spacing:0.01em;
+}}
+.btn-primary:hover {{
+  box-shadow:0 8px 36px rgba(129,140,248,0.5);
+  transform:translateY(-2px);
+}}
+.btn-secondary {{
+  display:inline-block;
+  background:rgba(255,255,255,0.04);
+  color:#94a3b8;font-weight:500;font-size:13px;
+  padding:12px 28px;border-radius:10px;text-decoration:none;
+  border:1px solid rgba(255,255,255,0.1);
+  transition:all 0.25s;letter-spacing:0.01em;
+}}
+.btn-secondary:hover {{
+  border-color:rgba(129,140,248,0.4);
+  color:#a5b4fc;transform:translateY(-2px);
+}}
+.photo-ring {{
+  position:relative;width:240px;height:240px;flex-shrink:0;
+  animation:float 5s ease-in-out infinite;
+}}
+.photo-ring::before {{
+  content:'';position:absolute;inset:-3px;border-radius:50%;
+  background:conic-gradient(from 0deg,#818cf8,#38bdf8,#a78bfa,#818cf8);
+  animation:spin 6s linear infinite;
+}}
+@keyframes spin {{ to {{ transform:rotate(360deg); }} }}
+.photo-ring::after {{
+  content:'';position:absolute;inset:-1px;border-radius:50%;
+  background:conic-gradient(from 0deg,rgba(129,140,248,0.6),rgba(56,189,248,0.6),rgba(167,139,250,0.6),rgba(129,140,248,0.6));
+  filter:blur(8px);
+  animation:spin 6s linear infinite;
+  z-index:-1;
+}}
+.photo-inner {{
+  position:absolute;inset:4px;border-radius:50%;overflow:hidden;background:#03050a;
+}}
 </style>
-<div id="home" style="
-    background:linear-gradient(135deg,#0d1117 0%,#0a0a0a 50%,#0d1117 100%);
-    border:1px solid #21262d;border-radius:16px;
-    padding:64px 56px 56px;position:relative;overflow:hidden;margin-top:20px;
-    animation:fadeUp 0.7s ease-out forwards;">
 
-    <!-- Glow orbs -->
-    <div style="position:absolute;top:-10%;right:5%;width:500px;height:500px;
-                background:radial-gradient(circle,rgba(96,165,250,0.06) 0%,transparent 65%);
-                pointer-events:none"></div>
-    <div style="position:absolute;bottom:-20%;left:-5%;width:400px;height:400px;
-                background:radial-gradient(circle,rgba(59,130,246,0.04) 0%,transparent 65%);
-                pointer-events:none"></div>
+<div class="hero-wrap" id="home">
+  <div class="hero-content" style="display:flex;align-items:center;justify-content:space-between;gap:48px;flex-wrap:wrap">
 
-    <div style="display:flex;align-items:center;justify-content:space-between;gap:48px;flex-wrap:wrap;position:relative">
+    <div style="flex:1;min-width:300px">
+      <div class="status-pill">
+        <div class="status-dot"></div>
+        <span style="font-family:'JetBrains Mono',monospace;font-size:11px;color:#a5b4fc;letter-spacing:0.5px">
+          OPEN TO WORK &nbsp;·&nbsp; QUANT · AI/ML · PRODUCT · WEALTHTECH
+        </span>
+      </div>
 
-        <div style="flex:1;min-width:300px">
-            <div class="hero-badge">OPEN TO WORK · QUANT RESEARCH · AI/ML · PRODUCT MANAGEMENT · WEALTH TECH</div>
+      <div class="hero-name">Nisha Sapkota</div>
 
-            <div style="font-size:54px;font-weight:700;color:#f0f6fc;line-height:1.05;
-                        margin-bottom:12px;letter-spacing:-1.5px">Nisha Sapkota</div>
+      <div class="hero-role">
+        <span style="background:linear-gradient(90deg,#818cf8,#38bdf8);-webkit-background-clip:text;
+                     -webkit-text-fill-color:transparent;background-clip:text;font-weight:600">
+          Quant Researcher &amp; AI/ML Specialist
+        </span>
+        &nbsp;·&nbsp; Product Manager in FinTech
+      </div>
 
-            <div style="font-size:20px;font-weight:400;color:#8b949e;margin-bottom:20px;line-height:1.4">
-                Quant Researcher &amp; <span style="color:#60a5fa;font-weight:600">AI/ML Specialist</span>
-                &nbsp;·&nbsp; <span style="color:#ffffff;font-weight:500">Product Manager</span> in FinTech/WealthTech
-            </div>
+      <div class="hero-desc">
+        MS Business Analytics (Machine Learning) graduate from UT Austin McCombs.
+        I build AI‑driven investment tools — from tax-loss harvesting engines to
+        RAG-based AI systems — at the intersection of machine learning and quantitative finance.
+      </div>
 
-            <div style="font-size:14px;color:#8b949e;line-height:1.85;max-width:540px;margin-bottom:32px">
-                MS Business Analytics (Machine Learning) graduate from UT Austin McCombs.
-                I build AI-driven investment tools — from tax-loss harvesting engines to
-                RAG-based AI systems — at the intersection of machine learning and quantitative finance.
-            </div>
+      <div class="chip-row">
+        <span class="chip">🎓 UT Austin McCombs MSBA</span>
+        <span class="chip">📍 Austin, TX</span>
+        <span class="chip">💼 ex-RBC Capital Markets</span>
+        <span class="chip">🤖 AI · Quant · WealthTech</span>
+        <span class="chip">📋 Product Strategy</span>
+      </div>
 
-            <div style="display:flex;flex-wrap:wrap;gap:8px;margin-bottom:32px">
-                <span class="chip">🎓 UT Austin McCombs MSBA</span>
-                <span class="chip">📍 Austin, TX</span>
-                <span class="chip">💼 ex-RBC Capital Markets</span>
-                <span class="chip">🤖 AI · Quant · WealthTech</span>
-                <span class="chip">📋 Product Strategy</span>
-            </div>
-
-            <div style="display:flex;gap:14px;flex-wrap:wrap">
-                <a href="https://www.linkedin.com/in/nisha-sapkota-aidata/" target="_blank" class="hero-btn-primary">
-                    LinkedIn Profile ↗
-                </a>
-                <a href="mailto:nisha.sapkota.ai@gmail.com" class="hero-btn-secondary">
-                    Get In Touch →
-                </a>
-            </div>
-        </div>
-
-        <div style="flex-shrink:0">
-            <div style="position:relative;width:230px;height:230px">
-                <div style="position:absolute;inset:-4px;border-radius:50%;
-                            background:linear-gradient(135deg,#60a5fa,#3b82f6,#1d4ed8);
-                            animation:heroGlow 4s ease infinite;background-size:200% 200%"></div>
-                <div style="position:absolute;inset:3px;border-radius:50%;
-                            overflow:hidden;background:#0a0a0a">
-                    <img src="data:image/jpeg;base64,{PROFILE_IMG}"
-                         style="width:120%;height:120%;margin-left:-10%;margin-top:-5%;
-                                object-fit:cover;object-position:center top"
-                         alt="Nisha Sapkota">
-                </div>
-            </div>
-        </div>
-
+      <div style="display:flex;gap:14px;flex-wrap:wrap">
+        <a href="https://www.linkedin.com/in/nisha-sapkota-aidata/" target="_blank" class="btn-primary">
+          LinkedIn Profile ↗
+        </a>
+        <a href="mailto:nisha.sapkota.ai@gmail.com" class="btn-secondary">
+          Get In Touch →
+        </a>
+      </div>
     </div>
+
+    <div class="photo-ring">
+      <div class="photo-inner">
+        <img src="data:image/jpeg;base64,{PROFILE_IMG}"
+             style="width:120%;height:120%;margin-left:-10%;margin-top:-5%;
+                    object-fit:cover;object-position:center top"
+             alt="Nisha Sapkota">
+      </div>
+    </div>
+
+  </div>
 </div>
 """)
 
-# ── Stats row ─────────────────────────────────────────────────────────────────
+# ── Stats ─────────────────────────────────────────────────────────────────────
 st.markdown("---")
 for col, number, label, icon in zip(
     st.columns(4),
     ["5+", "10+", "2", "10+"],
     ["Years of Experience", "Projects Built", "Industry Awards", "Tools & Languages"],
-    ["🏆", "🚀", "🥇", "🛠"],
+    ["⚡", "🚀", "🏆", "🛠"],
 ):
     with col:
         st.html(f"""
-        <div style="background:#111111;border:1px solid #21262d;border-radius:12px;
-                    padding:26px;text-align:center;
-                    transition:transform 0.25s,border-color 0.25s,box-shadow 0.25s"
-             onmouseover="this.style.transform='translateY(-4px)';this.style.borderColor='rgba(96,165,250,0.4)';this.style.boxShadow='0 12px 32px rgba(96,165,250,0.1)'"
-             onmouseout="this.style.transform='translateY(0)';this.style.borderColor='#21262d';this.style.boxShadow='none'">
-            <div style="font-size:22px;margin-bottom:6px">{icon}</div>
-            <div style="font-size:36px;font-weight:700;color:#60a5fa;
-                        font-family:'JetBrains Mono',monospace">{number}</div>
-            <div style="font-size:11px;color:#8b949e;margin-top:6px;
-                        text-transform:uppercase;letter-spacing:0.5px">{label}</div>
+        <div style="background:rgba(12,18,32,0.6);border:1px solid rgba(255,255,255,0.07);
+                    border-radius:16px;padding:28px;text-align:center;
+                    transition:all 0.3s ease;backdrop-filter:blur(8px)"
+             onmouseover="this.style.borderColor='rgba(129,140,248,0.4)';this.style.transform='translateY(-5px)';this.style.boxShadow='0 20px 48px rgba(129,140,248,0.12)'"
+             onmouseout="this.style.borderColor='rgba(255,255,255,0.07)';this.style.transform='translateY(0)';this.style.boxShadow='none'">
+            <div style="font-size:24px;margin-bottom:8px">{icon}</div>
+            <div style="font-size:38px;font-weight:800;letter-spacing:-1px;
+                        background:linear-gradient(135deg,#818cf8,#38bdf8);
+                        -webkit-background-clip:text;-webkit-text-fill-color:transparent;
+                        background-clip:text;font-family:'JetBrains Mono',monospace">{number}</div>
+            <div style="font-size:11px;color:#64748b;margin-top:6px;
+                        text-transform:uppercase;letter-spacing:1px;font-weight:500">{label}</div>
         </div>
         """)
 
@@ -328,12 +457,10 @@ for col, number, label, icon in zip(
 # ════════════════════════════════════════════════════════════════════════════
 st.markdown('<div id="about"></div>', unsafe_allow_html=True)
 st.html("""
-<div style="padding:32px 0 12px">
-    <div style="font-family:'JetBrains Mono',monospace;font-size:11px;color:#60a5fa;
-                letter-spacing:2px;text-transform:uppercase;margin-bottom:6px">WHO I AM</div>
-    <div style="font-size:32px;font-weight:700;color:#f0f6fc;letter-spacing:-0.5px">About Me</div>
-    <div style="width:48px;height:3px;background:linear-gradient(90deg,#60a5fa,#3b82f6);
-                border-radius:2px;margin-top:10px"></div>
+<div style="padding:40px 0 8px">
+  <span class="sec-label">WHO I AM</span>
+  <span class="sec-title">About Me</span>
+  <div class="sec-bar"></div>
 </div>
 """)
 
@@ -341,55 +468,58 @@ col_about_text, col_about_img = st.columns([3, 2])
 
 with col_about_text:
     st.html("""
-    <div style="background:#111111;border:1px solid #21262d;border-radius:12px;padding:30px;height:100%;
-                transition:border-color 0.25s"
-         onmouseover="this.style.borderColor='rgba(96,165,250,0.3)'"
-         onmouseout="this.style.borderColor='#21262d'">
+    <div style="background:rgba(12,18,32,0.6);border:1px solid rgba(255,255,255,0.07);
+                border-radius:20px;padding:32px;height:100%;backdrop-filter:blur(10px);
+                transition:border-color 0.3s"
+         onmouseover="this.style.borderColor='rgba(129,140,248,0.2)'"
+         onmouseout="this.style.borderColor='rgba(255,255,255,0.07)'">
 
-        <p style="font-size:14px;color:#c9d1d9;line-height:1.9;margin-bottom:18px">
+        <p style="font-size:14.5px;color:#94a3b8;line-height:1.95;margin-bottom:20px">
             At my core, I'm someone who builds things that help people — and
-            <span style="color:#60a5fa;font-weight:500">wealth tech</span> is where that drive found
+            <span style="color:#a5b4fc;font-weight:500">wealth tech</span> is where that drive found
             its sharpest focus. Financial tools have historically been built <em>for</em> institutions,
             not individuals. I want to change that. Whether it's a tax-loss harvesting engine or an
             AI-driven portfolio optimizer, I'm motivated by the idea that better technology can give
             everyday investors access to strategies once reserved for the ultra-wealthy.
         </p>
 
-        <p style="font-size:14px;color:#c9d1d9;line-height:1.9;margin-bottom:18px">
+        <p style="font-size:14.5px;color:#94a3b8;line-height:1.95;margin-bottom:20px">
             That instinct to serve showed up early. In 2017, I won Nepal's
-            <span style="color:#ffffff;font-weight:500">Open Data Hackathon</span> building a
+            <span style="color:#e2e8f0;font-weight:500">Open Data Hackathon</span> building a
             data-driven solution for public good. A year later, I was named one of
-            <span style="color:#ffffff;font-weight:500">Nepal's 100 Most Influential Women</span> —
+            <span style="color:#e2e8f0;font-weight:500">Nepal's 100 Most Influential Women</span> —
             recognition that pushed me to take my platform seriously and keep showing up for my community.
         </p>
 
-        <p style="font-size:14px;color:#c9d1d9;line-height:1.9;margin-bottom:18px">
+        <p style="font-size:14.5px;color:#94a3b8;line-height:1.95;margin-bottom:20px">
             Personal growth is something I chase deliberately. I don't wait to feel ready — I sign up
             first and figure it out. That mindset is what got me on a bike for the
-            <span style="color:#ffffff;font-weight:500">MS 150</span>, a 150-mile charity ride raising
-            funds for multiple sclerosis research. It's also what led me to Toastmasters (VP of
-            Membership) and what drove me to earn my
-            <span style="color:#60a5fa;font-weight:500">MS in Business Analytics</span> from
-            UT Austin McCombs — specializing in machine learning at the intersection of AI and finance.
+            <span style="color:#e2e8f0;font-weight:500">MS 150</span>, a 150-mile charity ride raising
+            funds for multiple sclerosis research. It's also what drove me to earn my
+            <span style="background:linear-gradient(90deg,#818cf8,#38bdf8);-webkit-background-clip:text;
+                         -webkit-text-fill-color:transparent;background-clip:text;font-weight:600">
+              MS in Business Analytics</span>
+            from UT Austin McCombs — specializing in machine learning at the intersection of AI and finance.
         </p>
 
-        <p style="font-size:14px;color:#c9d1d9;line-height:1.9;margin:0">
+        <p style="font-size:14.5px;color:#94a3b8;line-height:1.95;margin:0">
             I believe the best work happens when technical rigor meets human empathy —
             and I try to bring both to everything I build.
         </p>
 
-        <div style="display:flex;flex-wrap:wrap;gap:8px;margin-top:24px;padding-top:20px;border-top:1px solid #21262d">
-            <span style="font-size:11px;background:rgba(96,165,250,0.08);border:1px solid rgba(96,165,250,0.25);
-                         color:#93c5fd;padding:5px 12px;border-radius:6px;
+        <div style="display:flex;flex-wrap:wrap;gap:8px;margin-top:26px;padding-top:22px;
+                    border-top:1px solid rgba(255,255,255,0.06)">
+            <span style="font-size:12px;background:rgba(129,140,248,0.08);border:1px solid rgba(129,140,248,0.2);
+                         color:#a5b4fc;padding:5px 13px;border-radius:20px;
                          font-family:'JetBrains Mono',monospace">🏆 100 Influential Women of Nepal</span>
-            <span style="font-size:11px;background:rgba(96,165,250,0.08);border:1px solid rgba(96,165,250,0.25);
-                         color:#93c5fd;padding:5px 12px;border-radius:6px;
+            <span style="font-size:12px;background:rgba(129,140,248,0.08);border:1px solid rgba(129,140,248,0.2);
+                         color:#a5b4fc;padding:5px 13px;border-radius:20px;
                          font-family:'JetBrains Mono',monospace">🥇 Open Data Hackathon Winner</span>
-            <span style="font-size:11px;background:rgba(96,165,250,0.08);border:1px solid rgba(96,165,250,0.25);
-                         color:#93c5fd;padding:5px 12px;border-radius:6px;
+            <span style="font-size:12px;background:rgba(129,140,248,0.08);border:1px solid rgba(129,140,248,0.2);
+                         color:#a5b4fc;padding:5px 13px;border-radius:20px;
                          font-family:'JetBrains Mono',monospace">🚴 Bike MS 150 Rider</span>
-            <span style="font-size:11px;background:rgba(96,165,250,0.08);border:1px solid rgba(96,165,250,0.25);
-                         color:#93c5fd;padding:5px 12px;border-radius:6px;
+            <span style="font-size:12px;background:rgba(129,140,248,0.08);border:1px solid rgba(129,140,248,0.2);
+                         color:#a5b4fc;padding:5px 13px;border-radius:20px;
                          font-family:'JetBrains Mono',monospace">🎤 Toastmasters VP</span>
         </div>
     </div>
@@ -397,39 +527,45 @@ with col_about_text:
 
 with col_about_img:
     st.html(f"""
-    <div style="display:flex;flex-direction:column;gap:12px">
-        <div style="border-radius:12px;overflow:hidden;border:1px solid #21262d;
-                    position:relative;height:360px;transition:border-color 0.25s"
-             onmouseover="this.style.borderColor='rgba(96,165,250,0.4)'"
-             onmouseout="this.style.borderColor='#21262d'">
+    <div style="display:flex;flex-direction:column;gap:14px">
+        <div style="border-radius:18px;overflow:hidden;border:1px solid rgba(255,255,255,0.07);
+                    position:relative;height:340px;transition:border-color 0.3s,box-shadow 0.3s"
+             onmouseover="this.style.borderColor='rgba(129,140,248,0.35)';this.style.boxShadow='0 16px 48px rgba(129,140,248,0.12)'"
+             onmouseout="this.style.borderColor='rgba(255,255,255,0.07)';this.style.boxShadow='none'">
             <img src="data:image/jpeg;base64,{MS150_IMG}"
                  style="width:100%;height:100%;object-fit:cover;object-position:center 30%;display:block;
-                        transition:transform 0.4s ease"
-                 onmouseover="this.style.transform='scale(1.04)'"
+                        transition:transform 0.5s ease"
+                 onmouseover="this.style.transform='scale(1.05)'"
                  onmouseout="this.style.transform='scale(1)'"
-                 alt="Nisha at Bike MS 150 — 100 Miles milestone">
+                 alt="Nisha at Bike MS 150">
             <div style="position:absolute;bottom:0;left:0;right:0;
-                        background:linear-gradient(transparent,rgba(0,0,0,0.9));
-                        padding:18px 16px 14px">
-                <div style="font-family:'JetBrains Mono',monospace;font-size:10px;color:#60a5fa;letter-spacing:1px">BIKE MS 150 · SOLO</div>
-                <div style="font-size:12px;color:#c9d1d9;margin-top:2px">100 miles milestone</div>
+                        background:linear-gradient(transparent,rgba(3,5,10,0.95));
+                        padding:20px 18px 16px">
+                <div style="font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:1.5px;
+                            background:linear-gradient(90deg,#818cf8,#38bdf8);
+                            -webkit-background-clip:text;-webkit-text-fill-color:transparent;
+                            background-clip:text">BIKE MS 150 · SOLO</div>
+                <div style="font-size:12px;color:#94a3b8;margin-top:3px">100 miles milestone</div>
             </div>
         </div>
-        <div style="border-radius:12px;overflow:hidden;border:1px solid #21262d;
-                    position:relative;height:360px;transition:border-color 0.25s"
-             onmouseover="this.style.borderColor='rgba(96,165,250,0.4)'"
-             onmouseout="this.style.borderColor='#21262d'">
+        <div style="border-radius:18px;overflow:hidden;border:1px solid rgba(255,255,255,0.07);
+                    position:relative;height:340px;transition:border-color 0.3s,box-shadow 0.3s"
+             onmouseover="this.style.borderColor='rgba(129,140,248,0.35)';this.style.boxShadow='0 16px 48px rgba(129,140,248,0.12)'"
+             onmouseout="this.style.borderColor='rgba(255,255,255,0.07)';this.style.boxShadow='none'">
             <img src="data:image/jpeg;base64,{MS150_GROUP_IMG}"
                  style="width:100%;height:100%;object-fit:cover;object-position:center 20%;display:block;
-                        transition:transform 0.4s ease"
-                 onmouseover="this.style.transform='scale(1.04)'"
+                        transition:transform 0.5s ease"
+                 onmouseover="this.style.transform='scale(1.05)'"
                  onmouseout="this.style.transform='scale(1)'"
-                 alt="MS 150 team ride">
+                 alt="MS 150 team">
             <div style="position:absolute;bottom:0;left:0;right:0;
-                        background:linear-gradient(transparent,rgba(0,0,0,0.9));
-                        padding:18px 16px 14px">
-                <div style="font-family:'JetBrains Mono',monospace;font-size:10px;color:#60a5fa;letter-spacing:1px">BIKE MS 150 · TEAM</div>
-                <div style="font-size:12px;color:#c9d1d9;margin-top:2px">Riding for MS research</div>
+                        background:linear-gradient(transparent,rgba(3,5,10,0.95));
+                        padding:20px 18px 16px">
+                <div style="font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:1.5px;
+                            background:linear-gradient(90deg,#818cf8,#38bdf8);
+                            -webkit-background-clip:text;-webkit-text-fill-color:transparent;
+                            background-clip:text">BIKE MS 150 · TEAM</div>
+                <div style="font-size:12px;color:#94a3b8;margin-top:3px">Riding for MS research</div>
             </div>
         </div>
     </div>
@@ -440,12 +576,10 @@ with col_about_img:
 # ════════════════════════════════════════════════════════════════════════════
 st.markdown('<div id="experience"></div>', unsafe_allow_html=True)
 st.html("""
-<div style="padding:32px 0 12px">
-    <div style="font-family:'JetBrains Mono',monospace;font-size:11px;color:#60a5fa;
-                letter-spacing:2px;text-transform:uppercase;margin-bottom:6px">CAREER</div>
-    <div style="font-size:32px;font-weight:700;color:#f0f6fc;letter-spacing:-0.5px">Experience</div>
-    <div style="width:48px;height:3px;background:linear-gradient(90deg,#60a5fa,#3b82f6);
-                border-radius:2px;margin-top:10px"></div>
+<div style="padding:40px 0 8px">
+  <span class="sec-label">CAREER</span>
+  <span class="sec-title">Experience</span>
+  <div class="sec-bar"></div>
 </div>
 """)
 
@@ -494,24 +628,29 @@ experiences = [
 
 for exp in experiences:
     st.html(f"""
-    <div style="display:flex;gap:20px;padding:22px;border:1px solid #21262d;border-radius:12px;
-                margin-bottom:10px;background:#111111;
-                transition:border-color 0.25s,box-shadow 0.25s,transform 0.25s"
-         onmouseover="this.style.borderColor='rgba(96,165,250,0.35)';this.style.boxShadow='0 8px 32px rgba(96,165,250,0.08)';this.style.transform='translateX(4px)'"
-         onmouseout="this.style.borderColor='#21262d';this.style.boxShadow='none';this.style.transform='translateX(0)'">
-        <div style="width:44px;height:44px;border-radius:50%;background:rgba(96,165,250,0.1);
-                    border:2px solid rgba(96,165,250,0.4);display:flex;align-items:center;
-                    justify-content:center;font-size:18px;flex-shrink:0;margin-top:2px">{exp['icon']}</div>
+    <div style="display:flex;gap:22px;padding:24px 26px;
+                border:1px solid rgba(255,255,255,0.07);border-radius:18px;
+                margin-bottom:12px;background:rgba(12,18,32,0.5);
+                backdrop-filter:blur(8px);
+                transition:all 0.3s ease"
+         onmouseover="this.style.borderColor='rgba(129,140,248,0.3)';this.style.transform='translateX(6px)';this.style.boxShadow='0 8px 40px rgba(129,140,248,0.08)';this.style.background='rgba(15,23,42,0.8)'"
+         onmouseout="this.style.borderColor='rgba(255,255,255,0.07)';this.style.transform='translateX(0)';this.style.boxShadow='none';this.style.background='rgba(12,18,32,0.5)'">
+        <div style="width:46px;height:46px;border-radius:14px;
+                    background:linear-gradient(135deg,rgba(129,140,248,0.15),rgba(56,189,248,0.1));
+                    border:1px solid rgba(129,140,248,0.25);
+                    display:flex;align-items:center;justify-content:center;
+                    font-size:20px;flex-shrink:0;margin-top:2px">{exp['icon']}</div>
         <div style="flex:1">
             <div style="display:flex;justify-content:space-between;align-items:flex-start;
-                        flex-wrap:wrap;gap:6px;margin-bottom:4px">
-                <div style="font-size:17px;font-weight:700;color:#f0f6fc">{exp['company']}</div>
-                <div style="font-family:'JetBrains Mono',monospace;font-size:11px;color:#60a5fa;
-                            background:rgba(96,165,250,0.08);border:1px solid rgba(96,165,250,0.25);
-                            padding:3px 10px;border-radius:6px">{exp['period']}</div>
+                        flex-wrap:wrap;gap:8px;margin-bottom:4px">
+                <div style="font-size:17px;font-weight:700;color:#e2e8f0;letter-spacing:-0.2px">{exp['company']}</div>
+                <div style="font-family:'JetBrains Mono',monospace;font-size:11px;
+                            background:linear-gradient(90deg,rgba(129,140,248,0.12),rgba(56,189,248,0.1));
+                            border:1px solid rgba(129,140,248,0.2);color:#a5b4fc;
+                            padding:4px 12px;border-radius:20px;white-space:nowrap">{exp['period']}</div>
             </div>
-            <div style="font-size:13px;color:#93c5fd;font-weight:500;margin-bottom:8px">{exp['role']}</div>
-            <div style="font-size:13px;color:#8b949e;line-height:1.7">{exp['desc']}</div>
+            <div style="font-size:13px;color:#818cf8;font-weight:500;margin-bottom:9px">{exp['role']}</div>
+            <div style="font-size:13.5px;color:#64748b;line-height:1.75">{exp['desc']}</div>
             {exp_tags(exp['tags'])}
         </div>
     </div>
@@ -522,12 +661,10 @@ for exp in experiences:
 # ════════════════════════════════════════════════════════════════════════════
 st.markdown('<div id="projects"></div>', unsafe_allow_html=True)
 st.html("""
-<div style="padding:32px 0 12px">
-    <div style="font-family:'JetBrains Mono',monospace;font-size:11px;color:#60a5fa;
-                letter-spacing:2px;text-transform:uppercase;margin-bottom:6px">WORK</div>
-    <div style="font-size:32px;font-weight:700;color:#f0f6fc;letter-spacing:-0.5px">Projects</div>
-    <div style="width:48px;height:3px;background:linear-gradient(90deg,#60a5fa,#3b82f6);
-                border-radius:2px;margin-top:10px"></div>
+<div style="padding:40px 0 8px">
+  <span class="sec-label">WORK</span>
+  <span class="sec-title">Projects</span>
+  <div class="sec-bar"></div>
 </div>
 """)
 
@@ -538,10 +675,10 @@ projects = [
         "title": "Tax-Loss Harvesting & Portfolio Optimization Engine",
         "desc": (
             "Institutional-grade simulation engine for Vise's MSBA Capstone. Models after-tax portfolio "
-            "returns with full lot tracking, rebalancing strategies, and a Bloomberg-terminal Streamlit dashboard."
+            "returns with full lot tracking, rebalancing strategies, and a Bloomberg-style Streamlit dashboard."
         ),
         "highlights": [
-            "Product spec → backtesting engine → stakeholder dashboard delivered in 12-week capstone cycle",
+            "Product spec → backtesting engine → stakeholder dashboard in 12-week capstone cycle",
             "ST/LT gain classification with loss carry-forward and $3k ordinary income offset",
             "Lot selection: FIFO, LIFO, TAX_OPTIMAL — daily through threshold drift-band rebalancing",
             "Strategy comparison: CAGR, Sharpe ratio, max drawdown, tracking error, information ratio",
@@ -557,15 +694,14 @@ projects = [
         "title": "Personal Loan Acceptance Predictor",
         "desc": (
             "End-to-end ML system for a banking institution to predict which customers are most "
-            "likely to accept a personal loan offer — reducing unnecessary marketing spend and "
-            "improving campaign ROI through data-driven targeting."
+            "likely to accept a personal loan offer — reducing marketing spend through data-driven targeting."
         ),
         "highlights": [
             "Built & compared Decision Tree, Random Forest, AdaBoost, XGBoost — tuned RF won on recall",
             "Engineered features: Income per Family, CC-to-Income Ratio, Engagement Score",
             "4-tier marketing prioritization: Very High / High / Medium / Low priority segments",
-            "Batch scoring tab — upload a customer CSV, get scores + charts + downloadable results",
-            "Interactive Streamlit app with real-time prediction, feature importance chart & gauge",
+            "Batch scoring tab — upload CSV, get scores + charts + downloadable results instantly",
+            "Real-time Streamlit app with prediction, feature importance chart & probability gauge",
         ],
         "stack": ["Python", "Scikit-learn", "Random Forest", "XGBoost", "Streamlit", "Pandas"],
         "github": "https://github.com/nisha22sapkota/loan-acceptance-predictor",
@@ -577,7 +713,7 @@ projects = [
         "title": "Medical Diagnostic RAG AI System",
         "desc": (
             "RAG-based AI using the Merck Medical Manuals to assist clinicians with diagnostic questions, "
-            "drug info, and treatment plans. Addresses information overload in clinical decision-making."
+            "drug info, and treatment plans."
         ),
         "highlights": [
             "Ingested and indexed Merck Manuals into a vector knowledge base",
@@ -591,30 +727,30 @@ projects = [
         "category": "Computer Vision · Deep Learning · Great Learning",
         "title": "Plant Seedlings Classification (CNN)",
         "desc": (
-            "Convolutional Neural Network to classify plant seedlings into 12 species from images. "
-            "Built for the agricultural industry to automate crop/weed identification."
+            "CNN classifying plant seedlings into 12 species to automate crop/weed identification "
+            "and improve agricultural yield decisions."
         ),
         "highlights": [
-            "12-class image classification across species including Black-grass, Maize, Sugar beet",
-            "Custom CNN architecture built with TensorFlow / Keras on numpy image arrays",
-            "Image preprocessing pipeline: normalization, reshaping, augmentation",
-            "Dataset from Aarhus University (University of Southern Denmark collaboration)",
+            "12-class image classification including Black-grass, Maize, Sugar beet",
+            "Custom CNN with TensorFlow / Keras; numpy image array pipeline",
+            "Normalization, reshaping, augmentation preprocessing",
+            "Dataset from Aarhus University / University of Southern Denmark",
         ],
         "stack": ["Python", "TensorFlow", "Keras", "CNN", "NumPy", "Computer Vision"],
     },
     {
         "icon": "💹", "featured": False,
         "category": "Neural Networks · Classification · Great Learning",
-        "title": "Bank Customer Churn Prediction (Neural Network)",
+        "title": "Bank Customer Churn Prediction",
         "desc": (
-            "Neural network classifier to predict whether a bank customer will churn within 6 months, "
+            "Neural network classifier predicting bank customer churn within 6 months, "
             "helping management prioritize retention strategies."
         ),
         "highlights": [
-            "Final model: Adam optimizer + dropout (0.2) — AUC 0.83 on test set",
-            "Recall of 70.9% — correctly identified ~71% of customers who actually churned",
-            "Features: credit score, age, tenure, balance, number of products, geography",
-            "Actionable insights: dormant member re-engagement, product diversification",
+            "Adam optimizer + dropout (0.2) — AUC 0.83 on test set",
+            "Recall 70.9% — correctly identified ~71% of churning customers",
+            "Features: credit score, age, tenure, balance, products held, geography",
+            "Insights: dormant re-engagement, product diversification, tenure-based retention",
         ],
         "stack": ["Python", "Keras", "TensorFlow", "Neural Networks", "Scikit-learn", "Pandas"],
     },
@@ -623,14 +759,14 @@ projects = [
         "category": "ML Classification · Ensemble Methods · Great Learning",
         "title": "EasyVisa — US Visa Approval Prediction",
         "desc": (
-            "ML solution for the US Office of Foreign Labor Certification to predict visa "
-            "certification outcomes and identify key approval drivers. Benchmarked 5 models."
+            "ML solution for OFLC predicting visa certification outcomes "
+            "and identifying key approval drivers across 5 benchmarked models."
         ),
         "highlights": [
-            "Best model: XGBoost (oversampled) — Test Recall 87.3%, F1 81.9%, Accuracy 74.2%",
-            "Outperformed AdaBoost, Random Forest, and two Gradient Boosting variants",
-            "Top features: job experience, education level, continent, prevailing wage type",
-            "Handled class imbalance with SMOTE oversampling and undersampling strategies",
+            "XGBoost (oversampled): Test Recall 87.3%, F1 81.9%, Accuracy 74.2%",
+            "Outperformed AdaBoost, Random Forest, two Gradient Boosting variants",
+            "Top drivers: job experience, education level, continent, prevailing wage",
+            "Class imbalance handled with SMOTE oversampling and undersampling",
         ],
         "stack": ["Python", "XGBoost", "Scikit-learn", "SMOTE", "Pandas", "Seaborn"],
     },
@@ -639,14 +775,13 @@ projects = [
         "category": "Python EDA · Data Analysis · Great Learning",
         "title": "FoodHub Order Analysis & Business Insights",
         "desc": (
-            "Exploratory data analysis for a NYC food aggregator to understand demand patterns, "
-            "delivery performance, and customer satisfaction across restaurants and cuisine types."
+            "Exploratory data analysis for a NYC food aggregator to surface demand patterns, "
+            "delivery bottlenecks, and customer satisfaction drivers."
         ),
         "highlights": [
-            "10.54% of orders exceeded 60 min total time; 12.91% took exactly 60 min",
-            "Weekday mean delivery time: 28.34 min vs weekend: 22.47 min (5.87 min gap)",
-            "Identified underperforming restaurants by rating and cost-per-order analysis",
-            "Recommendations: promote top-rated cuisines, flag low-rated partners, loyalty discounts",
+            "10.54% of orders exceeded 60 min; weekday delivery 5.87 min slower than weekends",
+            "Identified underperforming restaurants by rating and cost-per-order",
+            "Recommendations: top-rated cuisine promotion, low-rated partner flagging",
         ],
         "stack": ["Python", "Pandas", "NumPy", "Matplotlib", "Seaborn", "EDA"],
     },
@@ -655,11 +790,11 @@ projects = [
         "category": "Quantitative Finance · UT Austin",
         "title": "Financial Analytics & Valuation Models",
         "desc": (
-            "Interactive financial models for bond valuation, dividend analysis, and portfolio return "
-            "calculation covering fixed income pricing and multi-asset return attribution."
+            "Interactive financial models for bond valuation, dividend analysis, and portfolio "
+            "return calculation covering fixed income and multi-asset attribution."
         ),
         "highlights": [
-            "Bond valuation with semi-annual coupons, YTM, and par value logic",
+            "Bond valuation with semi-annual coupons, YTM, par value logic",
             "Dividend discount model with multi-stage growth assumptions",
             "Portfolio return calculator with asset allocation optimization",
         ],
@@ -670,14 +805,14 @@ projects = [
         "category": "Executive Analytics · RBC Capital Markets",
         "title": "Capital Markets Executive Dashboard Suite",
         "desc": (
-            "Executive dashboards for finance and operations leadership at RBC Capital Markets — "
-            "real-time BI enabling data-driven decision-making across business units."
+            "Executive dashboards for RBC Capital Markets leadership — real-time BI that "
+            "eliminated recurring ad-hoc requests across 50+ stakeholders."
         ),
         "highlights": [
-            "Translated C-suite requirements into self-serve BI: eliminated recurring ad-hoc reports",
-            "ETL pipelines feeding Tableau and Power BI dashboards used by 50+ stakeholders",
+            "Self-serve BI: eliminated recurring ad-hoc report requests from C-suite",
+            "ETL pipelines feeding Tableau and Power BI dashboards for 50+ stakeholders",
             "NetSuite Analytics integration for financial operations reporting",
-            "Reduced report turnaround time from days to real-time through automation",
+            "Reduced turnaround from days to real-time through pipeline automation",
         ],
         "stack": ["Tableau", "SQL", "NetSuite", "ETL", "Excel", "Power BI"],
     },
@@ -695,12 +830,10 @@ for i in range(0, len(projects), 2):
 # ════════════════════════════════════════════════════════════════════════════
 st.markdown('<div id="skills"></div>', unsafe_allow_html=True)
 st.html("""
-<div style="padding:32px 0 12px">
-    <div style="font-family:'JetBrains Mono',monospace;font-size:11px;color:#60a5fa;
-                letter-spacing:2px;text-transform:uppercase;margin-bottom:6px">CAPABILITIES</div>
-    <div style="font-size:32px;font-weight:700;color:#f0f6fc;letter-spacing:-0.5px">Skills &amp; Technologies</div>
-    <div style="width:48px;height:3px;background:linear-gradient(90deg,#60a5fa,#3b82f6);
-                border-radius:2px;margin-top:10px"></div>
+<div style="padding:40px 0 8px">
+  <span class="sec-label">CAPABILITIES</span>
+  <span class="sec-title">Skills &amp; Technologies</span>
+  <div class="sec-bar"></div>
 </div>
 """)
 
@@ -716,53 +849,64 @@ skill_groups = [
 for row_start in range(0, len(skill_groups), 3):
     row = skill_groups[row_start:row_start + 3]
     cols = st.columns(len(row))
-    for col, (group_title, skills) in zip(cols, row):
+    for col, (title, skills) in zip(cols, row):
         with col:
-            st.html(skill_group_html(group_title, skills))
+            st.html(skill_group_html(title, skills))
 
 # ════════════════════════════════════════════════════════════════════════════
 # EDUCATION & ACHIEVEMENTS
 # ════════════════════════════════════════════════════════════════════════════
 st.html("""
-<div style="padding:32px 0 12px">
-    <div style="font-family:'JetBrains Mono',monospace;font-size:11px;color:#60a5fa;
-                letter-spacing:2px;text-transform:uppercase;margin-bottom:6px">BACKGROUND</div>
-    <div style="font-size:32px;font-weight:700;color:#f0f6fc;letter-spacing:-0.5px">Education &amp; Achievements</div>
-    <div style="width:48px;height:3px;background:linear-gradient(90deg,#60a5fa,#3b82f6);
-                border-radius:2px;margin-top:10px"></div>
+<div style="padding:40px 0 8px">
+  <span class="sec-label">BACKGROUND</span>
+  <span class="sec-title">Education &amp; Achievements</span>
+  <div class="sec-bar"></div>
 </div>
 """)
 
 col_edu, col_ach = st.columns(2)
 
 with col_edu:
-    st.html("""
-    <div style="background:#111111;border:1px solid #21262d;border-radius:12px;padding:24px;
-                margin-bottom:12px;transition:border-color 0.25s,box-shadow 0.25s"
-         onmouseover="this.style.borderColor='rgba(96,165,250,0.4)';this.style.boxShadow='0 8px 24px rgba(96,165,250,0.08)'"
-         onmouseout="this.style.borderColor='#21262d';this.style.boxShadow='none'">
-        <div style="display:flex;align-items:center;gap:10px;margin-bottom:10px">
-            <span style="font-size:22px">🎓</span>
-            <div style="font-size:15px;font-weight:700;color:#f0f6fc">MS Business Analytics (Machine Learning)</div>
+    for edu in [
+        {
+            "emoji": "🎓",
+            "title": "MS Business Analytics (Machine Learning)",
+            "school": "University of Texas at Austin — McCombs School of Business",
+            "period": "Jul 2025 – Jun 2026 · Graduated",
+            "detail": "Specialization: Machine Learning · AI-driven investment tools, portfolio analytics, quantitative finance"
+        },
+        {
+            "emoji": "📊",
+            "title": "Data Analytics & Visualization Boot Camp",
+            "school": "University of Minnesota",
+            "period": "2020",
+            "detail": "Foundations of analytics and data visualization"
+        },
+    ]:
+        st.html(f"""
+        <div style="background:rgba(12,18,32,0.6);border:1px solid rgba(255,255,255,0.07);
+                    border-radius:18px;padding:26px;margin-bottom:12px;
+                    backdrop-filter:blur(8px);
+                    transition:all 0.3s"
+             onmouseover="this.style.borderColor='rgba(129,140,248,0.35)';this.style.boxShadow='0 12px 40px rgba(129,140,248,0.1)';this.style.transform='translateY(-3px)'"
+             onmouseout="this.style.borderColor='rgba(255,255,255,0.07)';this.style.boxShadow='none';this.style.transform='translateY(0)'">
+            <div style="display:flex;align-items:flex-start;gap:14px">
+                <div style="width:44px;height:44px;border-radius:12px;flex-shrink:0;
+                            background:linear-gradient(135deg,rgba(129,140,248,0.15),rgba(56,189,248,0.1));
+                            border:1px solid rgba(129,140,248,0.2);
+                            display:flex;align-items:center;justify-content:center;font-size:20px">{edu['emoji']}</div>
+                <div>
+                    <div style="font-size:15px;font-weight:700;color:#e2e8f0;margin-bottom:5px">{edu['title']}</div>
+                    <div style="font-size:13px;font-weight:500;margin-bottom:5px;
+                                background:linear-gradient(90deg,#818cf8,#38bdf8);
+                                -webkit-background-clip:text;-webkit-text-fill-color:transparent;
+                                background-clip:text">{edu['school']}</div>
+                    <div style="font-size:12px;color:#64748b;margin-bottom:5px">{edu['period']}</div>
+                    <div style="font-size:12px;color:#64748b">{edu['detail']}</div>
+                </div>
+            </div>
         </div>
-        <div style="font-size:13px;color:#60a5fa;margin-bottom:6px;font-weight:500">
-            University of Texas at Austin — McCombs School of Business</div>
-        <div style="font-size:12px;color:#8b949e;margin-bottom:4px">Jul 2025 – Jun 2026 · Graduated</div>
-        <div style="font-size:12px;color:#8b949e">
-            Specialization: Machine Learning · AI-driven investment tools, portfolio analytics, quantitative finance</div>
-    </div>
-    <div style="background:#111111;border:1px solid #21262d;border-radius:12px;padding:24px;
-                transition:border-color 0.25s,box-shadow 0.25s"
-         onmouseover="this.style.borderColor='rgba(96,165,250,0.4)';this.style.boxShadow='0 8px 24px rgba(96,165,250,0.08)'"
-         onmouseout="this.style.borderColor='#21262d';this.style.boxShadow='none'">
-        <div style="display:flex;align-items:center;gap:10px;margin-bottom:10px">
-            <span style="font-size:22px">📊</span>
-            <div style="font-size:15px;font-weight:700;color:#f0f6fc">Data Analytics &amp; Visualization Boot Camp</div>
-        </div>
-        <div style="font-size:13px;color:#60a5fa;margin-bottom:6px;font-weight:500">University of Minnesota</div>
-        <div style="font-size:12px;color:#8b949e">2020 · Foundations of analytics and visualization</div>
-    </div>
-    """)
+        """)
 
 with col_ach:
     achievements = [
@@ -771,55 +915,65 @@ with col_ach:
         ("🎤", "VP Membership — Toastmasters",         "Leadership & Public Speaking", "Ongoing"),
         ("📜", "Great Learning AI/ML Certifications",  "Generative AI, RAG, ML Deployment", "2025–2026"),
     ]
-    html_blocks = "".join(f"""
-        <div style="display:flex;gap:14px;padding:15px 0;border-bottom:1px solid #21262d;
-                    transition:background 0.2s;border-radius:6px;cursor:default"
-             onmouseover="this.style.background='rgba(96,165,250,0.04)';this.style.paddingLeft='8px'"
-             onmouseout="this.style.background='transparent';this.style.paddingLeft='0'">
-            <div style="font-size:22px;flex-shrink:0;margin-top:1px">{icon}</div>
+    rows = "".join(f"""
+        <div style="display:flex;gap:16px;padding:16px 12px;border-radius:12px;
+                    border-bottom:1px solid rgba(255,255,255,0.05);
+                    transition:all 0.2s;cursor:default"
+             onmouseover="this.style.background='rgba(129,140,248,0.05)';this.style.paddingLeft='18px'"
+             onmouseout="this.style.background='transparent';this.style.paddingLeft='12px'">
+            <div style="width:40px;height:40px;border-radius:10px;flex-shrink:0;
+                        background:linear-gradient(135deg,rgba(129,140,248,0.12),rgba(56,189,248,0.08));
+                        border:1px solid rgba(129,140,248,0.15);
+                        display:flex;align-items:center;justify-content:center;font-size:18px">{icon}</div>
             <div>
-                <div style="font-size:13px;color:#c9d1d9;font-weight:600">{title}</div>
-                <div style="font-size:12px;color:#8b949e;margin-top:3px">{subtitle}</div>
-                <div style="font-size:11px;color:#60a5fa;font-family:'JetBrains Mono',monospace;margin-top:3px">{year}</div>
+                <div style="font-size:13.5px;color:#e2e8f0;font-weight:600;margin-bottom:3px">{title}</div>
+                <div style="font-size:12px;color:#64748b;margin-bottom:3px">{sub}</div>
+                <div style="font-size:11px;font-family:'JetBrains Mono',monospace;
+                            background:linear-gradient(90deg,#818cf8,#38bdf8);
+                            -webkit-background-clip:text;-webkit-text-fill-color:transparent;
+                            background-clip:text">{yr}</div>
             </div>
-        </div>""" for icon, title, subtitle, year in achievements)
-    st.html(f'<div style="background:#111111;border:1px solid #21262d;border-radius:12px;padding:22px;height:100%">{html_blocks}</div>')
+        </div>""" for icon, title, sub, yr in achievements)
+    st.html(f"""
+    <div style="background:rgba(12,18,32,0.6);border:1px solid rgba(255,255,255,0.07);
+                border-radius:18px;padding:16px;height:100%;backdrop-filter:blur(8px)">{rows}</div>
+    """)
 
 # ════════════════════════════════════════════════════════════════════════════
 # CONTACT
 # ════════════════════════════════════════════════════════════════════════════
 st.markdown('<div id="contact"></div>', unsafe_allow_html=True)
 st.html("""
-<div style="padding:32px 0 12px">
-    <div style="font-family:'JetBrains Mono',monospace;font-size:11px;color:#60a5fa;
-                letter-spacing:2px;text-transform:uppercase;margin-bottom:6px">CONNECT</div>
-    <div style="font-size:32px;font-weight:700;color:#f0f6fc;letter-spacing:-0.5px">Let's Talk</div>
-    <div style="width:48px;height:3px;background:linear-gradient(90deg,#60a5fa,#3b82f6);
-                border-radius:2px;margin-top:10px"></div>
+<div style="padding:40px 0 8px">
+  <span class="sec-label">CONNECT</span>
+  <span class="sec-title">Let's Talk</span>
+  <div class="sec-bar"></div>
 </div>
 """)
 
 col_links, col_open = st.columns(2)
 
 with col_links:
-    links_html = "".join(f"""
-        <a href="{href}" target="_blank"
-           style="display:flex;align-items:center;gap:14px;padding:15px 18px;
-                  background:#111111;border:1px solid #21262d;border-radius:10px;
-                  text-decoration:none;color:#c9d1d9;margin-bottom:10px;font-size:13px;
-                  transition:all 0.2s ease"
-           onmouseover="this.style.borderColor='rgba(96,165,250,0.4)';this.style.color='#93c5fd';this.style.transform='translateX(4px)';this.style.boxShadow='0 4px 16px rgba(96,165,250,0.1)'"
-           onmouseout="this.style.borderColor='#21262d';this.style.color='#c9d1d9';this.style.transform='translateX(0)';this.style.boxShadow='none'">
-            <span style="font-size:18px">{icon}</span>
-            <span>{label}</span>
-            <span style="margin-left:auto;color:#60a5fa;font-size:12px">↗</span>
-        </a>""" for icon, label, href in [
+    links = [
         ("💼", "linkedin.com/in/nisha-sapkota-aidata", "https://www.linkedin.com/in/nisha-sapkota-aidata/"),
         ("📧", "nisha.sapkota.ai@gmail.com",           "mailto:nisha.sapkota.ai@gmail.com"),
         ("⚡", "github.com/nisha22sapkota",            "https://github.com/nisha22sapkota"),
-    ])
+    ]
+    links_html = "".join(f"""
+        <a href="{href}" target="_blank"
+           style="display:flex;align-items:center;gap:14px;padding:16px 20px;
+                  background:rgba(12,18,32,0.6);border:1px solid rgba(255,255,255,0.07);
+                  border-radius:14px;text-decoration:none;color:#94a3b8;
+                  margin-bottom:10px;font-size:13px;backdrop-filter:blur(8px);
+                  transition:all 0.25s"
+           onmouseover="this.style.borderColor='rgba(129,140,248,0.35)';this.style.color='#a5b4fc';this.style.transform='translateX(5px)';this.style.boxShadow='0 4px 20px rgba(129,140,248,0.1)'"
+           onmouseout="this.style.borderColor='rgba(255,255,255,0.07)';this.style.color='#94a3b8';this.style.transform='translateX(0)';this.style.boxShadow='none'">
+            <span style="font-size:19px">{icon}</span>
+            <span>{label}</span>
+            <span style="margin-left:auto;font-size:14px;opacity:0.4">↗</span>
+        </a>""" for icon, label, href in links)
     st.html(f"""
-    <p style="color:#8b949e;font-size:14px;line-height:1.8;margin-bottom:20px">
+    <p style="color:#64748b;font-size:14px;line-height:1.85;margin-bottom:22px">
         Actively seeking full-time roles in Quant Research, AI/ML, Investment Strategy,
         and Product Management at asset management and wealth tech companies.
         Open to NYC and remote-first positions.
@@ -828,42 +982,65 @@ with col_links:
     """)
 
 with col_open:
-    st.html("""
-    <div style="background:linear-gradient(135deg,#0f172a 0%,#111827 100%);
-                border:1px solid rgba(96,165,250,0.25);border-radius:12px;padding:28px;
-                transition:border-color 0.25s,box-shadow 0.25s"
-         onmouseover="this.style.borderColor='rgba(96,165,250,0.5)';this.style.boxShadow='0 8px 32px rgba(96,165,250,0.1)'"
-         onmouseout="this.style.borderColor='rgba(96,165,250,0.25)';this.style.boxShadow='none'">
-        <div style="font-family:'JetBrains Mono',monospace;font-size:11px;color:#60a5fa;
-                    margin-bottom:18px;letter-spacing:1px">OPEN TO OPPORTUNITIES</div>
-        <div style="font-size:13px;color:#8b949e;line-height:2.4">
-            ✅ &nbsp;Quant Researcher / Analyst<br>
-            ✅ &nbsp;<strong style="color:#ffffff">Product Manager — FinTech / WealthTech</strong><br>
-            ✅ &nbsp;AI/ML Engineer (Finance)<br>
-            ✅ &nbsp;Data Scientist — WealthTech / FinTech<br>
-            ✅ &nbsp;Investment Strategist<br>
-            ✅ &nbsp;Portfolio Analytics &amp; Optimization<br>
-            ✅ &nbsp;Investment Analytics
-        </div>
-        <div style="margin-top:20px;padding-top:18px;border-top:1px solid #21262d;
-                    font-size:12px;color:#8b949e;display:flex;align-items:center;gap:8px">
+    roles = [
+        ("Quant Researcher / Analyst", False),
+        ("Product Manager — FinTech / WealthTech", True),
+        ("AI/ML Engineer (Finance)", False),
+        ("Data Scientist — WealthTech / FinTech", False),
+        ("Investment Strategist", False),
+        ("Portfolio Analytics & Optimization", False),
+        ("Investment Analytics", False),
+    ]
+    role_rows = "".join(
+        f'<div style="display:flex;align-items:center;gap:10px;padding:9px 0;'
+        f'border-bottom:1px solid rgba(255,255,255,0.04);font-size:13px">'
+        f'<span style="width:18px;height:18px;border-radius:50%;flex-shrink:0;display:flex;align-items:center;justify-content:center;'
+        f'background:linear-gradient(135deg,#818cf8,#38bdf8);font-size:9px;color:#03050a">✓</span>'
+        f'<span style="color:{"#e2e8f0" if bold else "#94a3b8"};font-weight:{"600" if bold else "400"}">{role}</span>'
+        f'</div>'
+        for role, bold in roles
+    )
+    st.html(f"""
+    <div style="background:linear-gradient(145deg,#0c1220,#0f172a);
+                border:1px solid rgba(129,140,248,0.2);border-radius:18px;
+                padding:28px;backdrop-filter:blur(10px);
+                box-shadow:0 0 60px rgba(129,140,248,0.05)">
+        <div style="font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:2px;
+                    text-transform:uppercase;margin-bottom:20px;
+                    background:linear-gradient(90deg,#818cf8,#38bdf8);
+                    -webkit-background-clip:text;-webkit-text-fill-color:transparent;
+                    background-clip:text">OPEN TO OPPORTUNITIES</div>
+        {role_rows}
+        <div style="margin-top:20px;padding-top:16px;border-top:1px solid rgba(255,255,255,0.06);
+                    font-size:12px;color:#64748b;display:flex;align-items:center;gap:8px">
             <span>📍 Austin, TX</span>
-            <span style="color:#30363d">·</span>
-            <span>Available <strong style="color:#60a5fa">Immediately</strong></span>
+            <span style="opacity:0.3">·</span>
+            <span>Available
+                <span style="background:linear-gradient(90deg,#818cf8,#38bdf8);
+                             -webkit-background-clip:text;-webkit-text-fill-color:transparent;
+                             background-clip:text;font-weight:600">Immediately</span>
+            </span>
         </div>
     </div>
     """)
 
 # ── Footer ────────────────────────────────────────────────────────────────────
 st.html("""
-<div style="text-align:center;padding:36px 0 24px;border-top:1px solid #21262d;margin-top:24px">
-    <div style="font-family:'JetBrains Mono',monospace;font-size:11px;color:#484f58;margin-bottom:12px">
-        Built with Python &amp; Streamlit &nbsp;·&nbsp; Nisha Sapkota &nbsp;·&nbsp; 2026
+<div style="text-align:center;padding:40px 0 28px;border-top:1px solid rgba(255,255,255,0.05);margin-top:28px">
+    <div style="background:linear-gradient(135deg,#818cf8,#38bdf8);
+                -webkit-background-clip:text;-webkit-text-fill-color:transparent;
+                background-clip:text;font-family:'JetBrains Mono',monospace;
+                font-size:16px;font-weight:600;margin-bottom:8px">nisha.sapkota</div>
+    <div style="font-size:12px;color:#1e293b;font-family:'JetBrains Mono',monospace;margin-bottom:16px">
+        Built with Python &amp; Streamlit · 2026
     </div>
-    <a href="#home" style="font-size:11px;color:#60a5fa;text-decoration:none;
+    <a href="#home" style="font-size:12px;color:#64748b;text-decoration:none;
        font-family:'JetBrains Mono',monospace;
-       transition:opacity 0.2s" onmouseover="this.style.opacity='0.7'" onmouseout="this.style.opacity='1'">
-        ↑ Back to top
+       transition:color 0.2s;border:1px solid rgba(255,255,255,0.07);
+       padding:6px 16px;border-radius:20px"
+       onmouseover="this.style.color='#a5b4fc';this.style.borderColor='rgba(129,140,248,0.3)'"
+       onmouseout="this.style.color='#64748b';this.style.borderColor='rgba(255,255,255,0.07)'">
+        ↑ back to top
     </a>
 </div>
 """)
