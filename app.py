@@ -10,7 +10,7 @@ MS150_IMG       = _img_b64("assets/ms150.jpg")
 MS150_GROUP_IMG = _img_b64("assets/ms150_group.jpg")
 
 st.set_page_config(
-    page_title="Nisha Sapkota | Quant & AI Portfolio",
+    page_title="Nisha Sapkota | AI Systems Engineer",
     page_icon="📊",
     layout="wide",
     initial_sidebar_state="collapsed",
@@ -193,8 +193,20 @@ def project_card_html(p):
     )
 
     links_html = ""
-    if p.get("github") or p.get("app_link"):
+    if p.get("github") or p.get("app_link") or p.get("write_up"):
         btns = ""
+        if p.get("write_up"):
+            btns += (
+                f'<a href="{p["write_up"]}" target="_blank" '
+                f'style="font-size:12px;color:#a5b4fc;'
+                f'background:rgba(129,140,248,0.08);'
+                f'border:1px solid rgba(129,140,248,0.2);'
+                f'padding:7px 16px;border-radius:8px;text-decoration:none;'
+                f'font-family:JetBrains Mono,monospace;font-weight:500;'
+                f'transition:all 0.2s;display:inline-block;margin-right:10px" '
+                f'onmouseover="this.style.background=\'rgba(129,140,248,0.18)\';this.style.borderColor=\'rgba(129,140,248,0.5)\'" '
+                f'onmouseout="this.style.background=\'rgba(129,140,248,0.08)\';this.style.borderColor=\'rgba(129,140,248,0.2)\'">📄 Read Write-up ↗</a>'
+            )
         if p.get("github"):
             btns += (
                 f'<a href="{p["github"]}" target="_blank" '
@@ -376,7 +388,7 @@ st.html(f"""
       <div class="status-pill">
         <div class="status-dot"></div>
         <span style="font-family:'JetBrains Mono',monospace;font-size:11px;color:#a5b4fc;letter-spacing:0.5px">
-          OPEN TO WORK &nbsp;·&nbsp; QUANT · AI/ML · PRODUCT · WEALTHTECH
+          OPEN TO WORK &nbsp;·&nbsp; AGENTIC AI · LLM SYSTEMS · APPLIED ML
         </span>
       </div>
 
@@ -385,23 +397,25 @@ st.html(f"""
       <div class="hero-role">
         <span style="background:linear-gradient(90deg,#818cf8,#38bdf8);-webkit-background-clip:text;
                      -webkit-text-fill-color:transparent;background-clip:text;font-weight:600">
-          Quant Researcher &amp; AI/ML Specialist
+          AI Systems Engineer
         </span>
-        &nbsp;·&nbsp; Product Manager in FinTech
+        &nbsp;·&nbsp; Agentic AI &amp; LLM Builder
       </div>
 
       <div class="hero-desc">
-        MS Business Analytics (Machine Learning) graduate from UT Austin McCombs.
-        I build AI‑driven investment tools — from tax-loss harvesting engines to
-        RAG-based AI systems — at the intersection of machine learning and quantitative finance.
+        MS Business Analytics (Generative AI &amp; Financial Analytics) from UT Austin McCombs.
+        I build agentic AI systems and evaluate frontier models — from a benchmark task in
+        Terminal-Bench 3 that catches Claude and GPT in genuine reasoning failures, to a
+        tax-loss harvesting engine built end-to-end with Claude Code and Codex — at the
+        intersection of AI engineering and quantitative finance.
       </div>
 
       <div class="chip-row">
+        <span class="chip">🤖 Agentic AI &amp; LLM Evaluation</span>
+        <span class="chip">⚙️ Claude Code · Codex</span>
         <span class="chip">🎓 UT Austin McCombs MSBA</span>
-        <span class="chip">📍 Austin, TX</span>
         <span class="chip">💼 ex-RBC Capital Markets</span>
-        <span class="chip">🤖 AI · Quant · WealthTech</span>
-        <span class="chip">📋 Product Strategy</span>
+        <span class="chip">📍 Austin, TX</span>
       </div>
 
       <div style="display:flex;gap:14px;flex-wrap:wrap">
@@ -502,6 +516,14 @@ with col_about_text:
             from UT Austin McCombs — specializing in machine learning at the intersection of AI and finance.
         </p>
 
+        <p style="font-size:14.5px;color:#94a3b8;line-height:1.95;margin-bottom:20px">
+            Lately that means building with AI agents rather than just for them — I ship
+            production systems end-to-end using <span style="color:#a5b4fc;font-weight:500">Claude Code
+            and Codex</span>, and I've gone deep enough on evaluating frontier models that I designed
+            an original benchmark task for <span style="color:#e2e8f0;font-weight:500">Terminal-Bench 3</span>,
+            built specifically to catch agents like Claude and GPT in genuine reasoning failures.
+        </p>
+
         <p style="font-size:14.5px;color:#94a3b8;line-height:1.95;margin:0">
             I believe the best work happens when technical rigor meets human empathy —
             and I try to bring both to everything I build.
@@ -591,17 +613,18 @@ experiences = [
         "desc": (
             "Identified after-tax return optimization as a critical gap in retail wealth management and "
             "led end-to-end product delivery: from problem definition and feature specification to "
-            "backtesting infrastructure and stakeholder reporting. Built a simulation engine with "
-            "threshold drift-band rebalancing, FIFO/LIFO/TAX_OPTIMAL lot tracking, ST/LT gain "
-            "classification, and loss carry-forward. Delivered an institutional-grade Streamlit dashboard "
-            "with strategy comparison analytics for Vise's investment team."
+            "backtesting infrastructure and stakeholder reporting. Designed and built the rebalancing "
+            "and tax-loss harvesting engine end-to-end using Claude Code and Codex — threshold drift-band "
+            "rebalancing, FIFO/LIFO/TAX_OPTIMAL lot tracking, ST/LT gain classification, and loss "
+            "carry-forward. Delivered an institutional-grade Streamlit dashboard with strategy comparison "
+            "analytics for Vise's investment team; scored 100/100 on the capstone."
         ),
-        "tags": ["Python", "Streamlit", "Pandas", "Portfolio Optimization",
+        "tags": ["Python", "Claude Code", "Codex", "Streamlit", "Pandas", "Portfolio Optimization",
                  "Tax-Loss Harvesting", "Backtesting", "Plotly"],
     },
     {
         "icon": "🏦", "company": "RBC Capital Markets",
-        "role": "Business Data Analyst · 2+ Years",
+        "role": "Data Scientist · 2+ Years",
         "period": "May 2023 – Jun 2025",
         "desc": (
             "Developed executive-level dashboards and data pipelines for finance and operations teams. "
@@ -656,6 +679,33 @@ for exp in experiences:
     </div>
     """)
 
+def project_compact_html(p):
+    tags = "".join(
+        f'<span style="font-size:10px;background:rgba(255,255,255,0.04);'
+        f'border:1px solid rgba(255,255,255,0.08);color:#64748b;'
+        f'padding:2px 8px;border-radius:20px;font-family:JetBrains Mono,monospace;'
+        f'white-space:nowrap">{t}</span>'
+        for t in p["stack"]
+    )
+    return f"""
+    <div style="display:flex;align-items:flex-start;gap:16px;padding:16px 20px;
+                border:1px solid rgba(255,255,255,0.06);border-radius:14px;
+                margin-bottom:10px;background:rgba(12,18,32,0.4);
+                transition:border-color 0.25s,background 0.25s"
+         onmouseover="this.style.borderColor='rgba(129,140,248,0.25)';this.style.background='rgba(12,18,32,0.7)'"
+         onmouseout="this.style.borderColor='rgba(255,255,255,0.06)';this.style.background='rgba(12,18,32,0.4)'">
+        <div style="font-size:20px;flex-shrink:0;margin-top:2px">{p['icon']}</div>
+        <div style="flex:1;min-width:0">
+            <div style="display:flex;align-items:baseline;gap:10px;flex-wrap:wrap">
+                <span style="font-size:14px;font-weight:700;color:#e2e8f0">{p['title']}</span>
+                <span style="font-size:10px;font-family:'JetBrains Mono',monospace;color:#64748b;
+                             letter-spacing:0.5px;text-transform:uppercase">{p['category']}</span>
+            </div>
+            <div style="font-size:12.5px;color:#64748b;line-height:1.6;margin:5px 0 10px">{p['desc']}</div>
+            <div style="display:flex;flex-wrap:wrap;gap:6px">{tags}</div>
+        </div>
+    </div>"""
+
 # ════════════════════════════════════════════════════════════════════════════
 # PROJECTS
 # ════════════════════════════════════════════════════════════════════════════
@@ -668,48 +718,77 @@ st.html("""
 </div>
 """)
 
-projects = [
+st.html("""
+<div style="margin-bottom:20px">
+  <span style="font-family:'JetBrains Mono',monospace;font-size:12px;letter-spacing:1.5px;
+              text-transform:uppercase;font-weight:600;
+              background:linear-gradient(90deg,#818cf8,#38bdf8);
+              -webkit-background-clip:text;-webkit-text-fill-color:transparent;
+              background-clip:text">Agentic AI &amp; Applied Builds</span>
+</div>
+""")
+
+projects_agentic = [
     {
-        "icon": "🧮", "featured": True,
-        "category": "Quant Finance · Vise Capstone",
-        "title": "Tax-Loss Harvesting & Portfolio Optimization Engine",
+        "icon": "🧠", "featured": True,
+        "category": "Agentic AI · Evaluation · Terminal-Bench 3",
+        "title": "Terminal-Bench 3 — Agent Harness & Benchmark Design",
         "desc": (
-            "Institutional-grade simulation engine for Vise's MSBA Capstone. Models after-tax portfolio "
-            "returns with full lot tracking, rebalancing strategies, and a Bloomberg-style Streamlit dashboard."
+            "Designed and validated an original evaluation task for an open-source benchmark "
+            "used to stress-test frontier coding agents (Claude Opus, GPT, Gemini) on multi-step, "
+            "tool-using workflows."
         ),
         "highlights": [
-            "Product spec → backtesting engine → stakeholder dashboard in 12-week capstone cycle",
+            "Engineered three independently-necessary bugs across separate modules; proved independence via ablation trials",
+            "Defined success criteria against oracle-solution and no-op control baselines",
+            "Diagnosed a false-negative failure mode from raw agent run-logs — an instruction ambiguity a model exploited — and closed it with a targeted spec fix",
+            "Ran regression + adversarial trials across Claude Opus, GPT, and Gemini, converting the task into 6+ reproducible model failures",
+        ],
+        "stack": ["Python", "Docker", "CI/CD", "LLM Agents", "Eval Harness Design"],
+        "github": "https://github.com/nisha22sapkota/terminal-bench-3/tree/task/sliding-window-aggregator",
+    },
+    {
+        "icon": "🧮", "featured": True,
+        "category": "AI Agent-Built · Quant Finance · Vise Capstone",
+        "title": "Tax-Loss Harvesting & Portfolio Rebalancing Engine",
+        "desc": (
+            "Institutional-grade simulation engine for Vise, an AI-driven asset manager, built end-to-end "
+            "using Claude Code and Codex. Models after-tax portfolio returns with full lot tracking, "
+            "rebalancing strategies, and a Bloomberg-style Streamlit dashboard."
+        ),
+        "highlights": [
+            "Product spec → backtesting engine → stakeholder dashboard in 12-week capstone cycle, agent-built with Claude Code / Codex",
             "ST/LT gain classification with loss carry-forward and $3k ordinary income offset",
             "Lot selection: FIFO, LIFO, TAX_OPTIMAL — daily through threshold drift-band rebalancing",
             "Strategy comparison: CAGR, Sharpe ratio, max drawdown, tracking error, information ratio",
             "Out-of-sample walk-forward validation; CI via GitHub Actions; Excel export; DRIP reinvestment",
         ],
-        "stack": ["Python", "Streamlit", "Pandas", "NumPy", "Plotly", "SciPy", "GitHub Actions"],
+        "stack": ["Python", "Claude Code", "Codex", "Streamlit", "Pandas", "NumPy", "Plotly", "GitHub Actions"],
         "github": "https://github.com/jringler30/portfolio-tlh-optimizer",
         "app_link": "https://portfolio-tlh-optimizer-msba-capstone.streamlit.app/",
     },
     {
-        "icon": "🏦", "featured": True,
-        "category": "ML · Banking · End-to-End App",
-        "title": "Personal Loan Acceptance Predictor",
+        "icon": "🗣️", "featured": True,
+        "category": "Generative AI · Embedding Retrieval",
+        "title": "Natural Language → SQL: Schema Retrieval",
         "desc": (
-            "End-to-end ML system for a banking institution to predict which customers are most "
-            "likely to accept a personal loan offer — reducing marketing spend through data-driven targeting."
+            "Embedding-based system that identifies the relevant database tables for a "
+            "plain-English question — the schema-retrieval step underneath NL-to-SQL — "
+            "benchmarked on the Instacart Market Basket dataset (3M+ orders, 5 core tables). "
+            "Co-authored with Franco Salinas and Aileen Li."
         ),
         "highlights": [
-            "Built & compared Decision Tree, Random Forest, AdaBoost, XGBoost — tuned RF won on recall",
-            "Engineered features: Income per Family, CC-to-Income Ratio, Engagement Score",
-            "4-tier marketing prioritization: Very High / High / Medium / Low priority segments",
-            "Batch scoring tab — upload CSV, get scores + charts + downloadable results instantly",
-            "Real-time Streamlit app with prediction, feature importance chart & probability gauge",
+            "19-query benchmark across easy (1-table), medium (2–3 table), and hard (3–4 table) difficulty tiers",
+            "all-MiniLM-L6-v2 sentence embeddings (384-dim), cosine similarity, top-k retrieval",
+            "Diagnosed a recurring orders vs. order_products confusion, then fixed it via targeted contrastive-pair fine-tuning (v1 → v2)",
+            "Overall Recall@3: 0.890 → 0.956; medium +11.1 pts, hard +11.7 pts after the targeted fix",
         ],
-        "stack": ["Python", "Scikit-learn", "Random Forest", "XGBoost", "Streamlit", "Pandas"],
-        "github": "https://github.com/nisha22sapkota/loan-acceptance-predictor",
-        "app_link": "https://loan-acceptance-predictor-app.streamlit.app/",
+        "stack": ["Python", "Embeddings", "Similarity Search", "Fine-Tuning", "SQL"],
+        "write_up": "https://francosalinas.netlify.app/posts/2026-03-14-natural-language-to-sql-schema-retrieval/",
     },
     {
         "icon": "🏥", "featured": False,
-        "category": "Generative AI · RAG · Great Learning",
+        "category": "Generative AI · RAG",
         "title": "Medical Diagnostic RAG AI System",
         "desc": (
             "RAG-based AI using the Merck Medical Manuals to assist clinicians with diagnostic questions, "
@@ -721,6 +800,36 @@ projects = [
             "Natural language clinical Q&A with precision/recall evaluation",
         ],
         "stack": ["Python", "LLM / RAG", "Vector DB", "LangChain", "NLP"],
+    },
+]
+
+for i in range(0, len(projects_agentic), 2):
+    row = projects_agentic[i:i + 2]
+    cols = st.columns(len(row))
+    for col, p in zip(cols, row):
+        with col:
+            st.html(project_card_html(p))
+
+st.html("""
+<div style="margin:36px 0 16px">
+  <span style="font-family:'JetBrains Mono',monospace;font-size:12px;letter-spacing:1.5px;
+              text-transform:uppercase;font-weight:600;color:#64748b">
+      Additional ML &amp; Analytics Coursework</span>
+</div>
+""")
+
+projects_coursework = [
+    {
+        "icon": "🏦", "featured": False,
+        "category": "ML · Banking · Great Learning",
+        "title": "Personal Loan Acceptance Predictor",
+        "desc": (
+            "End-to-end ML system for a banking institution to predict which customers are most "
+            "likely to accept a personal loan offer."
+        ),
+        "stack": ["Scikit-learn", "XGBoost", "Streamlit"],
+        "github": "https://github.com/nisha22sapkota/loan-acceptance-predictor",
+        "app_link": "https://loan-acceptance-predictor-app.streamlit.app/",
     },
     {
         "icon": "🌱", "featured": False,
@@ -818,12 +927,8 @@ projects = [
     },
 ]
 
-for i in range(0, len(projects), 2):
-    row = projects[i:i + 2]
-    cols = st.columns(len(row))
-    for col, p in zip(cols, row):
-        with col:
-            st.html(project_card_html(p))
+for p in projects_coursework:
+    st.html(project_compact_html(p))
 
 # ════════════════════════════════════════════════════════════════════════════
 # SKILLS
@@ -838,12 +943,12 @@ st.html("""
 """)
 
 skill_groups = [
-    ("// Languages",         [("Python", 95), ("SQL", 90), ("R", 80)]),
-    ("// ML / AI",           [("Scikit-learn / XGBoost", 90), ("LLMs / RAG / LangChain", 82), ("Deep Learning", 75)]),
-    ("// Quant / Finance",   [("Portfolio Analytics", 90), ("Tax-Loss Harvesting", 88), ("Backtesting", 85)]),
-    ("// Data & Viz",        [("Tableau / Power BI", 90), ("Pandas / NumPy / Plotly", 92), ("MySQL / MongoDB", 80)]),
-    ("// Tools",             [("Streamlit", 88), ("GitHub / CI-CD", 82), ("Cloud (AWS/GCP)", 72)]),
-    ("// Product & Methods", [("Product Strategy / Roadmapping", 85), ("Statistical Modeling", 88), ("Agile / Scrum", 82)]),
+    ("// Languages",           [("Python", 95), ("SQL", 90), ("R", 80)]),
+    ("// Agentic AI & Eval",   [("LLM Agents / Tool-Use", 88), ("Evaluation & Harness Design", 85), ("Claude Code / Codex", 92)]),
+    ("// ML / AI",             [("Scikit-learn / XGBoost", 90), ("LLMs / RAG / LangChain", 82), ("Deep Learning", 75)]),
+    ("// Quant / Finance",     [("Portfolio Analytics", 90), ("Tax-Loss Harvesting", 88), ("Backtesting", 85)]),
+    ("// Data & Viz",          [("Tableau / Power BI", 90), ("Pandas / NumPy / Plotly", 92), ("MySQL / MongoDB", 80)]),
+    ("// Tools",               [("Streamlit", 88), ("GitHub / CI-CD", 82), ("Cloud (AWS/GCP)", 72)]),
 ]
 
 for row_start in range(0, len(skill_groups), 3):
@@ -974,22 +1079,22 @@ with col_links:
         </a>""" for icon, label, href in links)
     st.html(f"""
     <p style="color:#64748b;font-size:14px;line-height:1.85;margin-bottom:22px">
-        Actively seeking full-time roles in Quant Research, AI/ML, Investment Strategy,
-        and Product Management at asset management and wealth tech companies.
-        Open to NYC and remote-first positions.
+        Actively seeking full-time roles as an AI Systems / Applied AI Engineer —
+        building agentic systems, LLM applications, and evaluation infrastructure,
+        with a differentiated edge in quantitative finance. Open to SF, NYC, and
+        remote-first positions.
     </p>
     {links_html}
     """)
 
 with col_open:
     roles = [
-        ("Quant Researcher / Analyst", False),
-        ("Product Manager — FinTech / WealthTech", True),
+        ("AI Systems / Applied AI Engineer", True),
+        ("Agentic AI Engineer — LLM Systems", True),
         ("AI/ML Engineer (Finance)", False),
+        ("Quant Researcher / Analyst", False),
         ("Data Scientist — WealthTech / FinTech", False),
-        ("Investment Strategist", False),
         ("Portfolio Analytics & Optimization", False),
-        ("Investment Analytics", False),
     ]
     role_rows = "".join(
         f'<div style="display:flex;align-items:center;gap:10px;padding:9px 0;'
