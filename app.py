@@ -801,6 +801,25 @@ projects_agentic = [
         ],
         "stack": ["Python", "LLM / RAG", "Vector DB", "LangChain", "NLP"],
     },
+    {
+        "icon": "🧭", "featured": False,
+        "category": "Applied HCI · Chrome Extension · Agentic AI UX",
+        "title": "NeuroOS — Cognitive-Load-Aware AI Interface",
+        "desc": (
+            "Independent project exploring whether interaction behavior alone — no biometrics, "
+            "no wearables — can approximate cognitive friction during AI chat sessions, and whether "
+            "adapting the interface in response actually helps. Grounded in CHI 2026 research on "
+            "AI-assistant-induced fatigue."
+        ),
+        "highlights": [
+            "Rules-based load score (0–2 / 3–5 / 6+) from interaction signals only: prompt-rewrite churn, tab-switch rate, copy/paste churn, session length — no prompt or response text ever read or stored",
+            "Shadow-DOM-isolated widget so the extension's own UI can't collide with host-page CSS, with selector fallbacks so ChatGPT/Claude DOM drift degrades gracefully instead of breaking",
+            "Competitive scan against shipped biometric-wellness tools and academic fatigue-detection research to scope an honest, non-overlapping wedge before writing code",
+            "Shipped end-to-end as a working Manifest V3 extension — signal capture → load score → dismissible intervention → local feedback logging",
+        ],
+        "stack": ["JavaScript", "Chrome Extension (MV3)", "Shadow DOM", "Behavioral Signal Design", "HCI Research"],
+        "github": "https://github.com/nisha22sapkota/neuroos-extension",
+    },
 ]
 
 for i in range(0, len(projects_agentic), 2):
