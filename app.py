@@ -730,7 +730,7 @@ st.html("""
 
 projects_agentic = [
     {
-        "icon": "🧠", "featured": True,
+        "icon": "🧠", "featured": False,
         "category": "Agentic AI · Evaluation · Terminal-Bench 3",
         "title": "Terminal-Bench 3 — Agent Harness & Benchmark Design",
         "desc": (
@@ -748,7 +748,7 @@ projects_agentic = [
         "github": "https://github.com/nisha22sapkota/terminal-bench-3/tree/task/sliding-window-aggregator",
     },
     {
-        "icon": "🧮", "featured": True,
+        "icon": "🧮", "featured": False,
         "category": "AI Agent-Built · Quant Finance · Vise Capstone",
         "title": "Tax-Loss Harvesting & Portfolio Rebalancing Engine",
         "desc": (
@@ -768,7 +768,7 @@ projects_agentic = [
         "app_link": "https://portfolio-tlh-optimizer-msba-capstone.streamlit.app/",
     },
     {
-        "icon": "🗣️", "featured": True,
+        "icon": "🗣️", "featured": False,
         "category": "Generative AI · Embedding Retrieval",
         "title": "Natural Language → SQL: Schema Retrieval",
         "desc": (
@@ -822,12 +822,9 @@ projects_agentic = [
     },
 ]
 
-for i in range(0, len(projects_agentic), 2):
-    row = projects_agentic[i:i + 2]
-    cols = st.columns(len(row))
-    for col, p in zip(cols, row):
-        with col:
-            st.html(project_card_html(p))
+for p in projects_agentic:
+    st.html(project_card_html(p))
+    st.html('<div style="height:20px"></div>')
 
 st.html("""
 <div style="margin:36px 0 16px">
