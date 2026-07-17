@@ -10,7 +10,7 @@ MS150_IMG       = _img_b64("assets/ms150.jpg")
 MS150_GROUP_IMG = _img_b64("assets/ms150_group.jpg")
 
 st.set_page_config(
-    page_title="Nisha Sapkota | AI Systems Engineer",
+    page_title="Nisha Sapkota | Data Scientist, Agentic AI",
     page_icon="📊",
     layout="wide",
     initial_sidebar_state="collapsed",
@@ -388,7 +388,7 @@ st.html(f"""
       <div class="status-pill">
         <div class="status-dot"></div>
         <span style="font-family:'JetBrains Mono',monospace;font-size:11px;color:#a5b4fc;letter-spacing:0.5px">
-          OPEN TO WORK &nbsp;·&nbsp; AGENTIC AI · LLM SYSTEMS · APPLIED ML
+          OPEN TO WORK &nbsp;·&nbsp; DATA SCIENCE · AGENTIC AI · LLM SYSTEMS
         </span>
       </div>
 
@@ -397,9 +397,9 @@ st.html(f"""
       <div class="hero-role">
         <span style="background:linear-gradient(90deg,#818cf8,#38bdf8);-webkit-background-clip:text;
                      -webkit-text-fill-color:transparent;background-clip:text;font-weight:600">
-          AI Systems Engineer
+          Data Scientist
         </span>
-        &nbsp;·&nbsp; Agentic AI &amp; LLM Builder
+        &nbsp;·&nbsp; Agentic AI Systems &amp; LLM Evaluation
       </div>
 
       <div class="hero-desc">
@@ -445,7 +445,7 @@ st.html(f"""
 st.markdown("---")
 for col, number, label, icon in zip(
     st.columns(4),
-    ["5+", "10+", "2", "10+"],
+    ["4+", "10+", "2", "10+"],
     ["Years of Experience", "Projects Built", "Industry Awards", "Tools & Languages"],
     ["⚡", "🚀", "🏆", "🛠"],
 ):
@@ -498,7 +498,7 @@ with col_about_text:
         </p>
 
         <p style="font-size:14.5px;color:#94a3b8;line-height:1.95;margin-bottom:20px">
-            That instinct to serve showed up early. In 2017, I won Nepal's
+            That instinct to serve showed up early. In 2017, I was 1st Runner-Up at Nepal's
             <span style="color:#e2e8f0;font-weight:500">Open Data Hackathon</span> building a
             data-driven solution for public good. A year later, I was named one of
             <span style="color:#e2e8f0;font-weight:500">Nepal's 100 Most Influential Women</span> —
@@ -536,7 +536,7 @@ with col_about_text:
                          font-family:'JetBrains Mono',monospace">🏆 100 Influential Women of Nepal</span>
             <span style="font-size:12px;background:rgba(129,140,248,0.08);border:1px solid rgba(129,140,248,0.2);
                          color:#a5b4fc;padding:5px 13px;border-radius:20px;
-                         font-family:'JetBrains Mono',monospace">🥇 Open Data Hackathon Winner</span>
+                         font-family:'JetBrains Mono',monospace">🥈 Open Data Hackathon — 1st Runner-Up</span>
             <span style="font-size:12px;background:rgba(129,140,248,0.08);border:1px solid rgba(129,140,248,0.2);
                          color:#a5b4fc;padding:5px 13px;border-radius:20px;
                          font-family:'JetBrains Mono',monospace">🚴 Bike MS 150 Rider</span>
@@ -609,15 +609,17 @@ experiences = [
     {
         "icon": "📈", "company": "Vise",
         "role": "Investment Specialist / Quant Researcher · Internship",
-        "period": "Jan 2026 – Present",
+        "period": "Jan 2026 – May 2026",
         "desc": (
             "Identified after-tax return optimization as a critical gap in retail wealth management and "
             "led end-to-end product delivery: from problem definition and feature specification to "
-            "backtesting infrastructure and stakeholder reporting. Designed and built the rebalancing "
-            "and tax-loss harvesting engine end-to-end using Claude Code and Codex — threshold drift-band "
-            "rebalancing, FIFO/LIFO/TAX_OPTIMAL lot tracking, ST/LT gain classification, and loss "
-            "carry-forward. Delivered an institutional-grade Streamlit dashboard with strategy comparison "
-            "analytics for Vise's investment team; scored 100/100 on the capstone."
+            "backtesting infrastructure and stakeholder reporting, as part of a 5-person McCombs capstone "
+            "team. Designed and built the rebalancing and tax-loss harvesting engine using Claude Code "
+            "and Codex — threshold drift-band rebalancing, FIFO/LIFO/TAX_OPTIMAL lot tracking, ST/LT gain "
+            "classification, and loss carry-forward — cutting realized tax drag 96% ($790 → $27) and "
+            "generating 88 bps of after-tax alpha over a daily-rebalancing benchmark. Delivered an "
+            "institutional-grade Streamlit dashboard with strategy comparison analytics for Vise's "
+            "investment team; scored 100/100 on the capstone."
         ),
         "tags": ["Python", "Claude Code", "Codex", "Streamlit", "Pandas", "Portfolio Optimization",
                  "Tax-Loss Harvesting", "Backtesting", "Plotly"],
@@ -730,6 +732,29 @@ st.html("""
 
 projects_agentic = [
     {
+        "icon": "🧭", "featured": True,
+        "category": "Applied HCI · Chrome Extension · Agentic AI UX",
+        "title": "NeuroOS — Cognitive-Load-Aware AI Interface",
+        "desc": (
+            "Independent project exploring whether interaction behavior alone — no biometrics, "
+            "no wearables — can approximate cognitive friction during AI chat sessions, and whether "
+            "adapting the interface in response actually helps. Grounded in \"When Help Hurts: "
+            "Verification Load and Fatigue with AI Coding Assistants\" (Fan, Liu, Pan & Zhang, "
+            "CHI '26, Honorable Mention) — the paper proposes adaptive, load-aware interfaces as "
+            "future design guidance; NeuroOS is a working instance of that direction, applied to "
+            "chat rather than IDE sessions."
+        ),
+        "highlights": [
+            "Rules-based load score (0–2 / 3–5 / 6+) from interaction signals only: prompt-rewrite churn, tab-switch rate, copy/paste churn, session length — no prompt or response text ever read or stored",
+            "Shadow-DOM-isolated widget so the extension's own UI can't collide with host-page CSS, with selector fallbacks so ChatGPT/Claude DOM drift degrades gracefully instead of breaking",
+            "Competitive scan against shipped biometric-wellness tools and academic fatigue-detection research to scope an honest, non-overlapping wedge before writing code",
+            "Shipped end-to-end as a working Manifest V3 extension — signal capture → load score → dismissible intervention → local feedback logging",
+            "First real user reported the interventions (calm mode, simplify nudge) genuinely reduced session friction — early signal, not yet a validated correlation",
+        ],
+        "stack": ["JavaScript", "Chrome Extension (MV3)", "Shadow DOM", "Behavioral Signal Design", "HCI Research"],
+        "github": "https://github.com/nisha22sapkota/neuroos-extension",
+    },
+    {
         "icon": "🧠", "featured": False,
         "category": "Agentic AI · Evaluation · Terminal-Bench 3",
         "title": "Terminal-Bench 3 — Agent Harness & Benchmark Design",
@@ -800,25 +825,6 @@ projects_agentic = [
             "Natural language clinical Q&A with precision/recall evaluation",
         ],
         "stack": ["Python", "LLM / RAG", "Vector DB", "LangChain", "NLP"],
-    },
-    {
-        "icon": "🧭", "featured": False,
-        "category": "Applied HCI · Chrome Extension · Agentic AI UX",
-        "title": "NeuroOS — Cognitive-Load-Aware AI Interface",
-        "desc": (
-            "Independent project exploring whether interaction behavior alone — no biometrics, "
-            "no wearables — can approximate cognitive friction during AI chat sessions, and whether "
-            "adapting the interface in response actually helps. Grounded in CHI 2026 research on "
-            "AI-assistant-induced fatigue."
-        ),
-        "highlights": [
-            "Rules-based load score (0–2 / 3–5 / 6+) from interaction signals only: prompt-rewrite churn, tab-switch rate, copy/paste churn, session length — no prompt or response text ever read or stored",
-            "Shadow-DOM-isolated widget so the extension's own UI can't collide with host-page CSS, with selector fallbacks so ChatGPT/Claude DOM drift degrades gracefully instead of breaking",
-            "Competitive scan against shipped biometric-wellness tools and academic fatigue-detection research to scope an honest, non-overlapping wedge before writing code",
-            "Shipped end-to-end as a working Manifest V3 extension — signal capture → load score → dismissible intervention → local feedback logging",
-        ],
-        "stack": ["JavaScript", "Chrome Extension (MV3)", "Shadow DOM", "Behavioral Signal Design", "HCI Research"],
-        "github": "https://github.com/nisha22sapkota/neuroos-extension",
     },
 ]
 
@@ -991,9 +997,9 @@ with col_edu:
     for edu in [
         {
             "emoji": "🎓",
-            "title": "MS Business Analytics (Machine Learning)",
+            "title": "MS Business Analytics (Generative AI & Financial Analytics)",
             "school": "University of Texas at Austin — McCombs School of Business",
-            "period": "Jul 2025 – Jun 2026 · Graduated",
+            "period": "Jul 2025 – May 2026 · Graduated",
             "detail": "Specialization: Machine Learning · AI-driven investment tools, portfolio analytics, quantitative finance"
         },
         {
@@ -1032,7 +1038,7 @@ with col_edu:
 with col_ach:
     achievements = [
         ("🏆", "100 Most Influential Women of Nepal", "Women with Vision", "2018"),
-        ("🥇", "Open Data Hackathon Winner",           "Data-driven solution for public good", "2017"),
+        ("🥈", "Open Data Hackathon — 1st Runner-Up",  "Data-driven solution for public good", "2017"),
         ("🎤", "VP Membership — Toastmasters",         "Leadership & Public Speaking", "Ongoing"),
         ("📜", "Great Learning AI/ML Certifications",  "Generative AI, RAG, ML Deployment", "2025–2026"),
     ]
