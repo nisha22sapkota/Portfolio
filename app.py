@@ -507,7 +507,7 @@ with col_about_text:
         </p>
 
         <p style="font-size:14.5px;color:#94a3b8;line-height:1.95;margin-bottom:20px">
-            That instinct to serve showed up early. In 2017, I was 1st Runner-Up at Nepal's
+            That upbringing showed up early, too. In 2017, I was 1st Runner-Up at Nepal's
             <span style="color:#e2e8f0;font-weight:500">Open Data Hackathon</span> building a
             data-driven solution for public good. A year later, I was named one of
             <span style="color:#e2e8f0;font-weight:500">Nepal's 100 Most Influential Women</span> —
