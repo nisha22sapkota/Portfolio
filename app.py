@@ -498,6 +498,15 @@ with col_about_text:
         </p>
 
         <p style="font-size:14.5px;color:#94a3b8;line-height:1.95;margin-bottom:20px">
+            I grew up in an entrepreneurial family, where lunches meant meeting new people,
+            investment discussions happened over the family dinner table, and weekends were for
+            charity work and community organizing, along with the hard work as a full-time job.
+            <span style="color:#e2e8f0;font-weight:500">My classroom was our home, and my first
+            teachers were the people around that table.</span> That upbringing shaped everything
+            about how I work, connect, and lead.
+        </p>
+
+        <p style="font-size:14.5px;color:#94a3b8;line-height:1.95;margin-bottom:20px">
             That instinct to serve showed up early. In 2017, I was 1st Runner-Up at Nepal's
             <span style="color:#e2e8f0;font-weight:500">Open Data Hackathon</span> building a
             data-driven solution for public good. A year later, I was named one of
