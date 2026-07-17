@@ -489,15 +489,6 @@ with col_about_text:
          onmouseout="this.style.borderColor='rgba(255,255,255,0.07)'">
 
         <p style="font-size:14.5px;color:#94a3b8;line-height:1.95;margin-bottom:20px">
-            At my core, I'm someone who builds things that help people — powerful tools have
-            historically been built <em>for</em> institutions and experts, not everyday people, and
-            I want to change that. It's shown up as a
-            <span style="color:#a5b4fc;font-weight:500">tax-loss harvesting engine</span> giving
-            everyday investors access to strategies once reserved for the ultra-wealthy, and it's
-            the same instinct behind how I build and evaluate AI systems today.
-        </p>
-
-        <p style="font-size:14.5px;color:#94a3b8;line-height:1.95;margin-bottom:20px">
             I grew up in an entrepreneurial family, where lunches meant meeting new people,
             investment discussions happened over the family dinner table, and weekends were for
             charity work and community organizing, along with the hard work as a full-time job.
