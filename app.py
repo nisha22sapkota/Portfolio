@@ -637,7 +637,7 @@ experiences = [
     },
     {
         "icon": "💡", "company": "Logic (Acquired by Accenture)",
-        "role": "Associate Product & Strategy Consultant · 2+ Years",
+        "role": "Junior Data Scientist / Associate Consultant · 2+ Years",
         "period": "Apr 2021 – May 2023",
         "desc": (
             "Led end-to-end product and solution delivery across enterprise engagements. "
